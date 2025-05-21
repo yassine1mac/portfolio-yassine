@@ -69,3 +69,7 @@ This section has moved here: [https://facebook.github.io/create-react-app/docs/d
 
 This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
 # portfolio-yassine
+
+
+[![Deploy](https://img.shields.io/github/deployments/yassine1mac/portfolio-yassine/github-pages?label=live%20site)](https://yassine1mac.github.io/portfolio-yassine/)
+
