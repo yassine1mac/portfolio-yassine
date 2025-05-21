@@ -8,7 +8,7 @@ const projects = [
     title: "Food & Calorie Estimation",
     description: "Deep learning app using ResNet18 to classify food and estimate calories. Dockerized and deployed via Streamlit.",
     tech: ["Python", "PyTorch", "Docker", "Streamlit"],
-    image: "/project-food.jpg",
+    image: `${import.meta.env.BASE_URL}project-food.jpg`,
     demo: "https://demo-food-calorie.vercel.app",
     code: "https://github.com/YassineChmirrou/Food-and-Calorie-Estimation-Deep-learning"
   },
@@ -16,7 +16,7 @@ const projects = [
     title: "Cheating Detection System",
     description: "Real-time cheating detection using pose estimation and ML (XGBoost). Includes MLflow tracking.",
     tech: ["Python", "OpenCV", "XGBoost", "MLflow"],
-    image: "/project-cheating.jpg",
+    image: `${import.meta.env.BASE_URL}project-cheating.jpg`,
     demo: "#",
     code: "https://github.com/YassineChmirrou/Cheating-Detection"
   },
@@ -24,7 +24,7 @@ const projects = [
     title: "Hotel Review NLP Analysis",
     description: "Sentiment and theme detection from hotel reviews using BERT and LDA. Scraping with Selenium.",
     tech: ["BERT", "LDA", "Selenium", "Pandas"],
-    image: "/project-nlp.jpg",
+    image: `${import.meta.env.BASE_URL}project-nlp.jpg`,
     demo: "#",
     code: "https://github.com/YassineChmirrou/Hotel-Review-NLP"
   },
@@ -32,11 +32,12 @@ const projects = [
     title: "AI Portfolio Website",
     description: "Modern portfolio built with React, Tailwind, and Framer Motion. Smooth animations and responsive design.",
     tech: ["React", "Tailwind", "Framer Motion"],
-    image: "/project-portfolio.jpg",
+    image: `${import.meta.env.BASE_URL}project-portfolio.jpg`,
     demo: "https://yassinechmirrou.vercel.app",
     code: "https://github.com/YassineChmirrou/Portfolio"
   }
 ];
+
 
 export default function Projects() {
   return (
