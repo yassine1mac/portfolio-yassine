@@ -35,19 +35,19 @@ export default function Contact() {
     {
       icon: <FaEnvelope className="text-2xl" />,
       title: "Email",
-      value: "yassine.chmirrou@example.com",
-      link: "mailto:yassine.chmirrou@example.com"
+      value: "yassinechmirrou1@gmail.com",
+      link: "mailto:yassinechmirrou1@gmail.com"
     },
     {
       icon: <FaWhatsapp className="text-2xl" />,
       title: "WhatsApp",
-      value: "+212 6XX XXX XXX",
-      link: "#"
+      value: "+212 620 305 398",
+      link: "https://wa.me/212620305398"
     },
     {
       icon: <FaMapMarkerAlt className="text-2xl" />,
       title: "Location",
-      value: "Morocco",
+      value: "Tétouan, Morocco",
       link: null
     }
   ];

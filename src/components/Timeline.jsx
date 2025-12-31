@@ -5,27 +5,27 @@ import { motion } from "framer-motion";
 const timelineData = [
   {
     title: "ENSA Tétouan",
-    subtitle: "Engineering Degree in Big Data & AI",
+    subtitle: "Engineering Degree - Data Science, Big Data & AI (5th Year)",
     date: "2020 – 2025",
-    description: "Studied advanced machine learning, big data systems, cloud technologies, and software engineering."
+    description: "Advanced studies in machine learning, deep learning, big data architectures, cloud computing, and distributed systems. GPA-focused curriculum with hands-on projects in NLP, computer vision, and data engineering."
   },
   {
     title: "AI Geeks Club",
-    subtitle: "Vice President",
+    subtitle: "Vice President & Technical Lead",
     date: "2024 – Present",
-    description: "Organized AI workshops, tech talks, and collaborative hackathons to promote hands-on learning."
+    description: "Leading a team of 50+ members. Organizing technical workshops on MLOps, organizing hackathons, and mentoring students in AI/ML. Spearheaded collaboration with industry partners for real-world AI projects."
   },
   {
     title: "Transparence Informatique",
     subtitle: "Data Analyst Intern",
     date: "Aug – Sep 2024",
-    description: "Built dashboards in Power BI and automated Excel data pipelines during a summer internship."
+    description: "Developed interactive dashboards in Power BI for business intelligence. Automated data processing workflows with Python, reducing manual effort by 70%. Worked with SQL databases and Excel automation."
   },
   {
-    title: "Personal AI Projects",
-    subtitle: "Freelance Projects & Research",
-    date: "2023 – Present",
-    description: "Developed ML projects like food classification, cheating detection, and sentiment analysis tools."
+    title: "AI/ML Projects & Research",
+    subtitle: "Independent Developer & Researcher",
+    date: "2022 – Present",
+    description: "Built 15+ production-ready AI projects: food classification (ResNet), cheating detection (pose estimation), hotel review sentiment analysis (BERT), and real-time data pipelines (Apache Spark, Kafka). All projects deployed with Docker and CI/CD."
   }
 ];
 

@@ -2,25 +2,25 @@
 const translations = {
     en: {
       hero: {
-        hello: "Hello",
-        title: "I’m Yassine Chmirrou,",
-        subtitle: "AI & Big Data Engineering Student",
-        description: "I build intelligent data systems, from machine learning models to real-time pipelines.",
-        whatsapp: "Whatsapp",
-        cv: "View CV"
+        hello: "Hi, I'm",
+        title: "Yassine Chmirrou",
+        subtitle: "AI Engineer & Data Scientist",
+        description: "Building intelligent systems that transform data into impact. Specialized in machine learning, big data engineering, and scalable AI solutions.",
+        whatsapp: "Let's Talk",
+        cv: "Download CV"
       }
     },
     fr: {
       hero: {
-        hello: "Salut",
-        title: "Je suis Yassine Chmirrou,",
-        subtitle: "Étudiant en Big Data et Intelligence Artificielle",
-        description: "Je conçois des systèmes de données intelligents : de modèles ML aux pipelines temps réel.",
-        whatsapp: "Whatsapp",
-        cv: "Voir le CV"
+        hello: "Salut, je suis",
+        title: "Yassine Chmirrou",
+        subtitle: "Ingénieur IA & Data Scientist",
+        description: "Je développe des systèmes intelligents qui transforment les données en impact. Spécialisé en machine learning, big data et solutions IA scalables.",
+        whatsapp: "Contactez-moi",
+        cv: "Télécharger CV"
       }
     }
   };
-  
+
   export default translations;
   

@@ -19,10 +19,13 @@ import LanguageToggle from "./components/LanguageToggle";
 import ScrollToTop from "./components/ScrollToTop";
 
 export default function App() {
+  // Dark mode par défaut pour un look professionnel
   const [theme, setTheme] = useState("dark");
   const [language, setLanguage] = useState("en");
 
   useEffect(() => {
+    // Force dark mode by default
+    document.documentElement.classList.add("dark");
     document.documentElement.classList.toggle("dark", theme === "dark");
   }, [theme]);
 
