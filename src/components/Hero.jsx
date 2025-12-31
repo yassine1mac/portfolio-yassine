@@ -95,24 +95,79 @@ export default function Hero({ language }) {
           </motion.div>
         </div>
 
-        {/* Image de profil avec glow */}
+        {/* Image de profil avec effets 3D et glow */}
         <motion.div
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8 }}
-          className="relative w-full flex justify-center md:justify-end z-10"
+          initial={{ opacity: 0, scale: 0.9, rotateY: -20 }}
+          animate={{ opacity: 1, scale: 1, rotateY: 0 }}
+          transition={{ duration: 0.8, type: "spring", bounce: 0.3 }}
+          className="relative w-full flex justify-center md:justify-end z-10 perspective-1000"
         >
-          <div className="relative w-32 sm:w-40 md:w-72 lg:w-80">
-            {/* Glow / Gradient */}
-            <div className="absolute inset-0 rounded-full blur-3xl opacity-40 bg-gradient-to-br from-blue-400 via-purple-500 to-pink-400 scale-110 animate-pulse"></div>
+          <motion.div
+            className="relative w-48 sm:w-56 md:w-80 lg:w-96"
+            whileHover={{ scale: 1.05, rotateY: 5 }}
+            transition={{ duration: 0.3 }}
+          >
+            {/* Glow layers multiples */}
+            <div className="absolute inset-0 rounded-full blur-3xl opacity-50 bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 scale-110 animate-pulse"></div>
+            <div className="absolute inset-0 rounded-full blur-2xl opacity-30 bg-gradient-to-tr from-cyan-400 via-blue-500 to-purple-600 scale-125 animate-pulse" style={{ animationDelay: '0.5s' }}></div>
 
-            {/* Image */}
-            <img
-              src={`${import.meta.env.BASE_URL}profile-new.svg`}
-              alt="Profile"
-              className="relative z-10 w-full rounded-full object-cover shadow-xl ring-4 ring-white dark:ring-gray-800 transition-transform duration-500 ease-in-out hover:scale-105"
-            />
-          </div>
+            {/* Ring animé */}
+            <motion.div
+              className="absolute inset-0 rounded-full"
+              animate={{
+                boxShadow: [
+                  "0 0 20px rgba(59, 130, 246, 0.5)",
+                  "0 0 60px rgba(147, 51, 234, 0.8)",
+                  "0 0 20px rgba(236, 72, 153, 0.5)",
+                ],
+              }}
+              transition={{
+                duration: 3,
+                repeat: Infinity,
+                repeatType: "reverse",
+              }}
+            ></motion.div>
+
+            {/* Image avec effet glassmorphism */}
+            <div className="relative z-10 rounded-full overflow-hidden ring-4 ring-white/20 dark:ring-gray-700/30 backdrop-blur-sm shadow-2xl">
+              <img
+                src={`${import.meta.env.BASE_URL}profile-yassine.jpg`}
+                alt="Yassine Chmirrou - AI Engineer"
+                className="w-full h-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
+                onError={(e) => {
+                  e.target.src = `${import.meta.env.BASE_URL}profile.jpg`;
+                }}
+              />
+              {/* Overlay gradient au hover */}
+              <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
+            </div>
+
+            {/* Particules flottantes */}
+            <motion.div
+              className="absolute -top-4 -right-4 w-3 h-3 bg-blue-500 rounded-full"
+              animate={{
+                y: [-10, 10, -10],
+                opacity: [0.5, 1, 0.5],
+              }}
+              transition={{
+                duration: 2,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            ></motion.div>
+            <motion.div
+              className="absolute -bottom-4 -left-4 w-4 h-4 bg-purple-500 rounded-full"
+              animate={{
+                y: [10, -10, 10],
+                opacity: [0.3, 1, 0.3],
+              }}
+              transition={{
+                duration: 2.5,
+                repeat: Infinity,
+                ease: "easeInOut",
+              }}
+            ></motion.div>
+          </motion.div>
         </motion.div>
 
       </div>

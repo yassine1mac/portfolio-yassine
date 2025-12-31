@@ -129,59 +129,112 @@ const projects = [
 
 export default function Projects() {
   return (
-    <section id="projects" className="bg-white py-20 px-6 text-gray-900">
-      <motion.h2
+    <section id="projects" className="relative bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-24 px-6 overflow-hidden">
+      {/* Background decoration */}
+      <div className="absolute inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute top-20 right-10 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl"></div>
+        <div className="absolute bottom-40 left-10 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl"></div>
+      </div>
+
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-center text-4xl font-bold mb-16 text-gray-800"
+        transition={{ duration: 0.8 }}
+        className="text-center mb-16 relative z-10"
       >
-        Interactive Projects Showcase
-      </motion.h2>
+        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+          Featured Projects
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Explore my portfolio of AI and machine learning projects showcasing innovation and technical excellence
+        </p>
+      </motion.div>
 
-      <div className="max-w-6xl mx-auto grid gap-14 lg:grid-cols-2">
+      <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3 relative z-10">
         {projects.map((project, index) => (
           <motion.div
             key={index}
-            initial={{ opacity: 0, scale: 0.95 }}
-            whileInView={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: index * 0.2 }}
-            className="bg-white border border-gray-200 rounded-2xl overflow-hidden shadow-md hover:shadow-xl hover:ring-1 hover:ring-blue-400 transition-all duration-300 group"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: "-100px" }}
+            transition={{ duration: 0.5, delay: index * 0.1 }}
+            whileHover={{ y: -10 }}
+            className="group relative bg-white dark:bg-gray-800/50 backdrop-blur-sm rounded-2xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
           >
-            <div className="overflow-hidden h-60">
-              <img
-                src={project.image}
-                alt={project.title}
-                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
-              />
-            </div>
-            <div className="p-6">
-              <h3 className="text-xl font-semibold mb-2 text-gray-900">{project.title}</h3>
-              <p className="text-sm text-gray-600 mb-4 leading-relaxed">{project.description}</p>
-              <div className="flex flex-wrap gap-2 mb-4">
-                {project.tech.map((tech, i) => (
-                  <span key={i} className="bg-gray-100 text-gray-700 text-xs px-3 py-1 rounded-full">
-                    {tech}
-                  </span>
-                ))}
+            {/* Gradient border effect */}
+            <div className="absolute inset-0 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 opacity-0 group-hover:opacity-100 transition-opacity duration-300 rounded-2xl blur-xl"></div>
+
+            <div className="relative bg-white dark:bg-gray-800 rounded-2xl overflow-hidden m-[1px]">
+              {/* Image with overlay */}
+              <div className="relative overflow-hidden h-52">
+                <img
+                  src={project.image}
+                  alt={project.title}
+                  className="w-full h-full object-cover transition-all duration-700 group-hover:scale-110 group-hover:rotate-2"
+                />
+                {/* Gradient overlay */}
+                <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/20 to-transparent opacity-60 group-hover:opacity-40 transition-opacity"></div>
+
+                {/* Floating tech badge */}
+                <div className="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gray-800 dark:text-white shadow-lg">
+                  {project.tech[0]}
+                </div>
               </div>
-              <div className="flex gap-4">
-                <a
-                  href={project.demo}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-sm text-white bg-neutral-800 hover:bg-neutral-700 px-4 py-2 rounded-full"
-                >
-                  <FaExternalLinkAlt className="mr-2" /> Live
-                </a>
-                <a
-                  href={project.code}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="flex items-center text-sm text-white bg-blue-600 hover:bg-blue-500 px-4 py-2 rounded-full"
-                >
-                  <FaGithub className="mr-2" /> Code
-                </a>
+
+              {/* Content */}
+              <div className="p-6 space-y-4">
+                <h3 className="text-xl font-bold text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                  {project.title}
+                </h3>
+
+                <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3">
+                  {project.description}
+                </p>
+
+                {/* Tech stack pills */}
+                <div className="flex flex-wrap gap-2">
+                  {project.tech.slice(1, 4).map((tech, i) => (
+                    <span
+                      key={i}
+                      className="bg-gradient-to-r from-blue-50 to-purple-50 dark:from-blue-900/20 dark:to-purple-900/20 text-blue-700 dark:text-blue-300 text-xs px-3 py-1 rounded-full border border-blue-200/50 dark:border-blue-700/50"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                  {project.tech.length > 4 && (
+                    <span className="text-xs text-gray-500 dark:text-gray-400 px-2 py-1">
+                      +{project.tech.length - 4}
+                    </span>
+                  )}
+                </div>
+
+                {/* Action buttons */}
+                <div className="flex gap-3 pt-2">
+                  {project.demo !== "#" && (
+                    <motion.a
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      href={project.demo}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:shadow-lg transition-all"
+                    >
+                      <FaExternalLinkAlt size={12} /> View Demo
+                    </motion.a>
+                  )}
+                  {project.code !== "#" && (
+                    <motion.a
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      href={project.code}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className={`${project.demo !== "#" ? 'flex-1' : 'w-full'} flex items-center justify-center gap-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all`}
+                    >
+                      <FaGithub size={14} /> Code
+                    </motion.a>
+                  )}
+                </div>
               </div>
             </div>
           </motion.div>
