@@ -2,7 +2,7 @@
   "name": "portfolio-yassine",
   "version": "1.0.0",
   "private": true,
-  "homepage": "https://yassine1mac.github.io/portfolioyassine",
+  "homepage": "https://yassine1mac.github.io/portfolio-yassine",
   "scripts": {
     "dev": "vite",
     "build": "vite build",

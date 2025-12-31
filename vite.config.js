@@ -3,6 +3,6 @@ import { defineConfig } from 'vite';
 import react from '@vitejs/plugin-react';
 
 export default defineConfig({
-  base: '/portfolioyassine/', // 👈 sans tiret pour correspondre à l'URL partagée
+  base: '/portfolio-yassine/',
   plugins: [react()],
 });
