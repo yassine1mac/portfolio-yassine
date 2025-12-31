@@ -35,6 +35,94 @@ const projects = [
     image: `${import.meta.env.BASE_URL}project-portfolio.jpg`,
     demo: "https://yassinechmirrou.vercel.app",
     code: "https://github.com/YassineChmirrou/Portfolio"
+  },
+  {
+    title: "Real-Time Stock Price Predictor",
+    description: "LSTM-based neural network for predicting stock prices with live data streaming and visualization dashboard.",
+    tech: ["TensorFlow", "Keras", "Pandas", "Plotly", "WebSocket"],
+    image: `${import.meta.env.BASE_URL}project-stock.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Face Recognition Attendance System",
+    description: "Automated attendance tracking using deep face recognition and real-time video processing with MySQL database.",
+    tech: ["Python", "OpenCV", "FaceNet", "MySQL", "Flask"],
+    image: `${import.meta.env.BASE_URL}project-face.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Chatbot with RAG & LangChain",
+    description: "Intelligent chatbot using Retrieval-Augmented Generation with vector databases for context-aware responses.",
+    tech: ["LangChain", "OpenAI", "Pinecone", "FastAPI"],
+    image: `${import.meta.env.BASE_URL}project-chatbot.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Credit Card Fraud Detection",
+    description: "ML pipeline for detecting fraudulent transactions using ensemble methods and real-time anomaly detection.",
+    tech: ["Scikit-learn", "XGBoost", "Kafka", "Spark"],
+    image: `${import.meta.env.BASE_URL}project-fraud.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Image Segmentation Medical AI",
+    description: "U-Net architecture for medical image segmentation to assist in tumor detection and analysis.",
+    tech: ["PyTorch", "U-Net", "NumPy", "Matplotlib"],
+    image: `${import.meta.env.BASE_URL}project-medical.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Twitter Sentiment Analysis",
+    description: "Real-time sentiment analysis of tweets using transformers and interactive visualization with geographic mapping.",
+    tech: ["Transformers", "Twitter API", "D3.js", "MongoDB"],
+    image: `${import.meta.env.BASE_URL}project-twitter.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Recommendation Engine",
+    description: "Collaborative filtering recommendation system with matrix factorization and deep learning hybrid approach.",
+    tech: ["PyTorch", "Surprise", "Redis", "FastAPI"],
+    image: `${import.meta.env.BASE_URL}project-recommend.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Object Detection for Autonomous Driving",
+    description: "YOLO-based real-time object detection for identifying vehicles, pedestrians, and traffic signs.",
+    tech: ["YOLOv8", "OpenCV", "TensorRT", "CUDA"],
+    image: `${import.meta.env.BASE_URL}project-yolo.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "ETL Pipeline with Airflow",
+    description: "End-to-end data pipeline orchestration with Apache Airflow for processing millions of records daily.",
+    tech: ["Airflow", "PostgreSQL", "Docker", "Python"],
+    image: `${import.meta.env.BASE_URL}project-etl.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Voice Assistant AI",
+    description: "Voice-controlled AI assistant with speech recognition, natural language understanding, and text-to-speech.",
+    tech: ["Whisper", "GPT-4", "ElevenLabs", "Python"],
+    image: `${import.meta.env.BASE_URL}project-voice.jpg`,
+    demo: "#",
+    code: "#"
+  },
+  {
+    title: "Deep Learning Image Classifier",
+    description: "Transfer learning with EfficientNet for multi-class image classification achieving 97% accuracy.",
+    tech: ["TensorFlow", "EfficientNet", "Keras", "NumPy"],
+    image: `${import.meta.env.BASE_URL}project-classifier.jpg`,
+    demo: "#",
+    code: "#"
   }
 ];
 

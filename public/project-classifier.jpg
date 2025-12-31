@@ -1,0 +1,19 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="classifierBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#18181b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#3f3f46;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#classifierBg)"/>
+  <rect x="150" y="150" width="200" height="200" rx="10" fill="#3b82f6" opacity="0.3"/>
+  <rect x="400" y="150" width="200" height="200" rx="10" fill="#10b981" opacity="0.3"/>
+  <rect x="150" y="380" width="200" height="160" rx="10" fill="#fbbf24" opacity="0.3"/>
+  <rect x="400" y="380" width="200" height="160" rx="10" fill="#ec4899" opacity="0.3"/>
+  <text x="250" y="260" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">A</text>
+  <text x="500" y="260" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">B</text>
+  <text x="250" y="470" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">C</text>
+  <text x="500" y="470" font-family="Arial, sans-serif" font-size="32" fill="white" text-anchor="middle" font-weight="bold">D</text>
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="42" fill="white" text-anchor="middle" font-weight="bold">IMAGE CLASSIFIER</text>
+  <text x="400" y="580" font-family="monospace" font-size="24" fill="#10b981" text-anchor="middle">EfficientNet - 97% Acc</text>
+</svg>
