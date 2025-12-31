@@ -1,0 +1,21 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="etlBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#164e63;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#0891b2;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#etlBg)"/>
+  <circle cx="200" cy="300" r="60" fill="#fbbf24"/>
+  <text x="200" y="315" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" font-weight="bold">E</text>
+  <circle cx="400" cy="300" r="60" fill="#10b981"/>
+  <text x="400" y="315" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" font-weight="bold">T</text>
+  <circle cx="600" cy="300" r="60" fill="#3b82f6"/>
+  <text x="600" y="315" font-family="Arial, sans-serif" font-size="24" fill="white" text-anchor="middle" font-weight="bold">L</text>
+  <line x1="260" y1="300" x2="340" y2="300" stroke="white" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <line x1="460" y1="300" x2="540" y2="300" stroke="white" stroke-width="4" marker-end="url(#arrowhead)"/>
+  <polygon points="340,295 350,300 340,305" fill="white"/>
+  <polygon points="540,295 550,300 540,305" fill="white"/>
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="42" fill="white" text-anchor="middle" font-weight="bold">ETL PIPELINE</text>
+  <text x="400" y="520" font-family="monospace" font-size="24" fill="white" text-anchor="middle">Apache Airflow</text>
+</svg>

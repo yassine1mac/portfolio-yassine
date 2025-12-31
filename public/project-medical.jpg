@@ -1,0 +1,15 @@
+<svg width="800" height="600" xmlns="http://www.w3.org/2000/svg">
+  <defs>
+    <linearGradient id="medicalBg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" style="stop-color:#064e3b;stop-opacity:1" />
+      <stop offset="100%" style="stop-color:#059669;stop-opacity:1" />
+    </linearGradient>
+  </defs>
+  <rect width="800" height="600" fill="url(#medicalBg)"/>
+  <rect x="200" y="150" width="400" height="300" rx="10" fill="#022c22" stroke="#10b981" stroke-width="3"/>
+  <circle cx="400" cy="300" r="80" fill="none" stroke="#ef4444" stroke-width="4" stroke-dasharray="10,5"/>
+  <circle cx="400" cy="300" r="50" fill="#ef4444" opacity="0.3"/>
+  <path d="M 350 200 L 450 400 M 450 200 L 350 400" stroke="#10b981" stroke-width="2" opacity="0.5"/>
+  <text x="400" y="80" font-family="Arial, sans-serif" font-size="42" fill="white" text-anchor="middle" font-weight="bold">MEDICAL AI</text>
+  <text x="400" y="520" font-family="monospace" font-size="24" fill="#10b981" text-anchor="middle">U-Net Segmentation</text>
+</svg>
