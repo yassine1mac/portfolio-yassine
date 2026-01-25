@@ -65,11 +65,9 @@ export default function AboutMe() {
               {/* Image */}
               <img
                 src={`${import.meta.env.BASE_URL}profile-yassine.jpg`}
-                alt="Yassine Chmirrou"
+                alt="Yassine Chmirrou - AI & Machine Learning Engineer"
                 className="relative z-10 w-full rounded-2xl shadow-2xl ring-4 ring-white/20 dark:ring-gray-700/30"
-                onError={(e) => {
-                  e.target.src = `${import.meta.env.BASE_URL}profile.jpg`;
-                }}
+                loading="lazy"
               />
             </div>
           </motion.div>

@@ -132,11 +132,9 @@ export default function Hero({ language }) {
             <div className="relative z-10 rounded-full overflow-hidden ring-4 ring-white/20 dark:ring-gray-700/30 backdrop-blur-sm shadow-2xl">
               <img
                 src={`${import.meta.env.BASE_URL}profile-yassine.jpg`}
-                alt="Yassine Chmirrou - AI Engineer"
+                alt="Yassine Chmirrou - AI & Machine Learning Engineer"
                 className="w-full h-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
-                onError={(e) => {
-                  e.target.src = `${import.meta.env.BASE_URL}profile.jpg`;
-                }}
+                loading="eager"
               />
               {/* Overlay gradient au hover */}
               <div className="absolute inset-0 bg-gradient-to-t from-blue-600/20 via-transparent to-transparent opacity-0 hover:opacity-100 transition-opacity duration-300"></div>
