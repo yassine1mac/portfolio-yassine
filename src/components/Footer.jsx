@@ -91,7 +91,7 @@ export default function Footer() {
               >
                 +212 620 305 398
               </a>
-              <p className="text-gray-500">Tétouan, Morocco</p>
+              <p className="text-gray-500">Agadir, Morocco</p>
             </div>
 
             {/* Social Links */}

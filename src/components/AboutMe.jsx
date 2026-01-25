@@ -80,7 +80,7 @@ export default function AboutMe() {
             className="space-y-6"
           >
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              I'm a <span className="font-bold text-blue-600 dark:text-blue-400">5th-year Engineering student</span> specializing in <span className="font-semibold">Data Science, Big Data, and Artificial Intelligence</span> at ENSA Tétouan, Morocco.
+              I'm a <span className="font-bold text-blue-600 dark:text-blue-400">5th-year Engineering student</span> specializing in <span className="font-semibold">Data Science, Big Data, and Artificial Intelligence</span> at ENSA Agadir, Morocco.
             </p>
 
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">

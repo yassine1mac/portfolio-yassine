@@ -91,7 +91,7 @@ export default function Contact() {
     {
       icon: <FaMapMarkerAlt className="text-2xl" />,
       title: "Location",
-      value: "Tétouan, Morocco",
+      value: "Agadir, Morocco",
       link: null
     }
   ];

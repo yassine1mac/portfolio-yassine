@@ -4,7 +4,7 @@ import { motion } from "framer-motion";
 
 const timelineData = [
   {
-    title: "ENSA Tétouan",
+    title: "ENSA Agadir",
     subtitle: "Engineering Degree - Data Science, Big Data & AI (5th Year)",
     date: "2020 – 2025",
     description: "Advanced studies in machine learning, deep learning, big data architectures, cloud computing, and distributed systems. GPA-focused curriculum with hands-on projects in NLP, computer vision, and data engineering."
