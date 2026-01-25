@@ -21,6 +21,7 @@ const Testimonials = lazy(() => import('./components/Testimonials'));
 const Contact = lazy(() => import('./components/Contact'));
 const Projects = lazy(() => import('./components/Projects'));
 const CVModal = lazy(() => import('./components/CVModal'));
+const Resume = lazy(() => import('./components/Resume'));
 
 // Section loading fallback
 function SectionLoader() {
@@ -126,6 +127,11 @@ export default function App() {
 
               <Suspense fallback={<SectionLoader />}>
                 <Contact />
+              </Suspense>
+              <WaveSeparator />
+
+              <Suspense fallback={<SectionLoader />}>
+                <Resume />
               </Suspense>
             </main>
 

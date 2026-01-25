@@ -1,7 +1,8 @@
 // src/components/Projects.jsx
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { FaGithub, FaExternalLinkAlt, FaStar, FaCode } from "react-icons/fa";
+import { FaGithub, FaExternalLinkAlt, FaStar, FaCode, FaPlay } from "react-icons/fa";
+import ProjectModal from "./ProjectModal";
 
 const projects = [
   {
@@ -128,15 +129,32 @@ const projects = [
 
 const categories = ["All", "Deep Learning", "Computer Vision", "NLP", "Machine Learning", "Web Development"];
 
+// Projects with interactive demos
+const projectsWithDemos = ["Food & Calorie Estimation", "Cheating Detection System", "Hotel Review NLP Analysis"];
+
 export default function Projects() {
   const [filter, setFilter] = useState("All");
   const [showAll, setShowAll] = useState(false);
+  const [selectedProject, setSelectedProject] = useState(null);
+  const [isModalOpen, setIsModalOpen] = useState(false);
 
   const filteredProjects = projects.filter(
     project => filter === "All" || project.category === filter
   );
 
   const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
+
+  const openModal = (project) => {
+    setSelectedProject(project);
+    setIsModalOpen(true);
+  };
+
+  const closeModal = () => {
+    setIsModalOpen(false);
+    setSelectedProject(null);
+  };
+
+  const hasDemo = (title) => projectsWithDemos.includes(title);
 
   return (
     <section id="projects" className="relative bg-gradient-to-b from-gray-50 via-white to-gray-50 dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 py-24 px-6 overflow-hidden">
@@ -247,7 +265,17 @@ export default function Projects() {
 
                   {/* Action buttons */}
                   <div className="flex gap-3 pt-2">
-                    {project.demo !== "#" && (
+                    {hasDemo(project.title) ? (
+                      <motion.button
+                        whileHover={{ scale: 1.05 }}
+                        whileTap={{ scale: 0.95 }}
+                        onClick={() => openModal(project)}
+                        className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-green-500 to-emerald-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:shadow-lg transition-all"
+                        aria-label={`Try ${project.title} demo`}
+                      >
+                        <FaPlay size={12} aria-hidden="true" /> Try Demo
+                      </motion.button>
+                    ) : project.demo !== "#" ? (
                       <motion.a
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -259,14 +287,14 @@ export default function Projects() {
                       >
                         <FaExternalLinkAlt size={12} aria-hidden="true" /> Live Demo
                       </motion.a>
-                    )}
+                    ) : null}
                     <motion.a
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
                       href={project.code}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${project.demo !== "#" ? 'flex-1' : 'w-full'} flex items-center justify-center gap-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all`}
+                      className={`${hasDemo(project.title) || project.demo !== "#" ? 'flex-1' : 'w-full'} flex items-center justify-center gap-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all`}
                       aria-label={`View ${project.title} source code on GitHub`}
                     >
                       <FaGithub size={14} aria-hidden="true" /> View Code
@@ -295,6 +323,13 @@ export default function Projects() {
           </button>
         </motion.div>
       )}
+
+      {/* Project Modal */}
+      <ProjectModal
+        project={selectedProject}
+        isOpen={isModalOpen}
+        onClose={closeModal}
+      />
     </section>
   );
 }
