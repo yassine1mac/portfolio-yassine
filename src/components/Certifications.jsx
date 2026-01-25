@@ -1,64 +1,133 @@
 // src/components/Certifications.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt } from "react-icons/fa";
+import { FaExternalLinkAlt, FaAward, FaCertificate } from "react-icons/fa";
+import { SiCoursera, SiKaggle, SiDatacamp, SiUdemy, SiGoogle } from "react-icons/si";
 
 const certifications = [
   {
     title: "Deep Learning Specialization",
-    provider: "Coursera",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/4/4f/Coursera-Logo_600x600.svg",
-    link: "https://www.coursera.org/account/accomplishments/specialization/XYZ123"
+    provider: "Coursera - DeepLearning.AI",
+    icon: <SiCoursera className="text-3xl text-blue-500" />,
+    skills: ["Neural Networks", "CNN", "RNN", "Transformers"],
+    date: "2023",
+    status: "completed"
+  },
+  {
+    title: "Machine Learning",
+    provider: "Coursera - Stanford",
+    icon: <SiCoursera className="text-3xl text-blue-500" />,
+    skills: ["Supervised Learning", "Regression", "Classification"],
+    date: "2023",
+    status: "completed"
   },
   {
     title: "Python for Data Science",
     provider: "Kaggle",
-    logo: "https://upload.wikimedia.org/wikipedia/commons/7/7c/Kaggle_logo.png",
-    link: "https://www.kaggle.com/learn/certificates/XYZ456"
+    icon: <SiKaggle className="text-3xl text-cyan-500" />,
+    skills: ["Python", "Pandas", "NumPy", "Data Analysis"],
+    date: "2022",
+    status: "completed"
   },
   {
-    title: "Data Cleaning",
+    title: "Data Engineering",
     provider: "DataCamp",
-    logo: "https://cdn-images-1.medium.com/max/1600/1*mFz5xt2DR4v8ZzDqZTzG4g.png",
-    link: "https://www.datacamp.com/statement-of-accomplishment/XYZ789"
+    icon: <SiDatacamp className="text-3xl text-green-500" />,
+    skills: ["ETL", "SQL", "Data Pipelines", "Cloud"],
+    date: "2023",
+    status: "completed"
+  },
+  {
+    title: "TensorFlow Developer",
+    provider: "Google",
+    icon: <SiGoogle className="text-3xl text-orange-500" />,
+    skills: ["TensorFlow", "Keras", "Model Deployment"],
+    date: "2024",
+    status: "in-progress"
+  },
+  {
+    title: "AWS Machine Learning",
+    provider: "Amazon Web Services",
+    icon: <FaCertificate className="text-3xl text-yellow-500" />,
+    skills: ["SageMaker", "Lambda", "S3", "EC2"],
+    date: "2024",
+    status: "in-progress"
   }
 ];
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="bg-gray-50 dark:bg-gray-900 py-20 px-6 text-gray-800 dark:text-gray-100">
-      <motion.h2
+    <section id="certifications" className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-24 px-6 text-gray-800 dark:text-gray-100">
+      <motion.div
         initial={{ opacity: 0, y: 20 }}
         whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 1 }}
-        className="text-4xl font-bold text-center mb-16"
+        transition={{ duration: 0.8 }}
+        className="text-center mb-16"
       >
-        Certifications
-      </motion.h2>
+        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
+          Certifications
+        </h2>
+        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+          Continuous learning and professional development in AI, ML, and Data Science
+        </p>
+      </motion.div>
 
-      <div className="max-w-5xl mx-auto grid gap-10 md:grid-cols-2 lg:grid-cols-3">
+      <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert, i) => (
-          <motion.a
+          <motion.div
             key={i}
-            href={cert.link}
-            target="_blank"
-            rel="noopener noreferrer"
-            whileHover={{ scale: 1.03 }}
-            className="group bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-md hover:shadow-lg transition-all p-6 text-center flex flex-col items-center"
+            initial={{ opacity: 0, y: 30 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.5, delay: i * 0.1 }}
+            whileHover={{ y: -5 }}
+            className="group relative bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-700 rounded-2xl shadow-lg hover:shadow-xl transition-all overflow-hidden"
           >
-            <img
-              src={cert.logo}
-              alt={cert.provider}
-              className="h-14 mb-4 grayscale group-hover:grayscale-0 transition duration-300"
-            />
-            <h3 className="text-lg font-semibold mb-1 text-gray-900 dark:text-white">
-              {cert.title}
-            </h3>
-            <p className="text-sm text-blue-500 mb-2">{cert.provider}</p>
-            <div className="text-sm text-gray-500 dark:text-gray-400 flex items-center gap-1">
-              View Certificate <FaExternalLinkAlt className="inline-block" size={12} />
+            {/* Status badge */}
+            <div className={`absolute top-4 right-4 px-3 py-1 rounded-full text-xs font-semibold ${
+              cert.status === 'completed'
+                ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
+                : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
+            }`}>
+              {cert.status === 'completed' ? 'Completed' : 'In Progress'}
             </div>
-          </motion.a>
+
+            <div className="p-6">
+              {/* Icon */}
+              <div className="mb-4">
+                {cert.icon}
+              </div>
+
+              {/* Title & Provider */}
+              <h3 className="text-lg font-bold mb-1 text-gray-900 dark:text-white group-hover:text-blue-600 dark:group-hover:text-blue-400 transition-colors">
+                {cert.title}
+              </h3>
+              <p className="text-sm text-blue-500 dark:text-blue-400 mb-4">{cert.provider}</p>
+
+              {/* Skills */}
+              <div className="flex flex-wrap gap-2 mb-4">
+                {cert.skills.map((skill, j) => (
+                  <span
+                    key={j}
+                    className="bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 text-xs px-2 py-1 rounded-md"
+                  >
+                    {skill}
+                  </span>
+                ))}
+              </div>
+
+              {/* Date */}
+              <div className="flex items-center justify-between text-sm text-gray-500 dark:text-gray-400">
+                <span className="flex items-center gap-1">
+                  <FaAward className="text-yellow-500" />
+                  {cert.date}
+                </span>
+              </div>
+            </div>
+
+            {/* Gradient border on hover */}
+            <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
+          </motion.div>
         ))}
       </div>
     </section>
