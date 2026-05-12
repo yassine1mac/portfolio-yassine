@@ -41,7 +41,7 @@ export default function CVModal() {
                 <div className="flex items-center gap-4">
                   {/* Download Button */}
                   <a
-                    href="/CV__YASSINE_CHMIRROU.pdf"
+                    href="/cv.pdf"
                     download
                     className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
                   >
