@@ -115,7 +115,7 @@ export default function Footer() {
 
             {/* CV */}
             <a
-              href="/public/cv.pdf"
+              href="/cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="CV"
