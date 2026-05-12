@@ -23,3 +23,4 @@ Thumbs.db
 # Cache
 .cache/
 *.cache
+.DS_Store
