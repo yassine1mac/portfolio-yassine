@@ -61,7 +61,7 @@ export default function CVModal() {
 
               {/* PDF Viewer */}
               <iframe
-                src="/CV__YASSINE_CHMIRROU.pdf"
+                src="/cv.pdf"
                 title="Yassine Chmirrou CV"
                 className="w-full h-full bg-white"
               />
@@ -71,7 +71,7 @@ export default function CVModal() {
                 <p>
                   Your browser does not support PDFs.
                   <a
-                    href="/CV__YASSINE_CHMIRROU.pdf"
+                    href="/cv.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 underline ml-2"
