@@ -39,14 +39,14 @@ export default function CVModal() {
               </button>
 
               <iframe
-                src="/CV_YASSINE_CHMIRROU.pdf"
+                src="/CV__YASSINE_CHMIRROU.pdf"
                 title="Yassine Chmirrou CV"
                 className="w-full h-full"
               >
                 <p className="p-6 text-center">
                   Your browser does not support iframes.{" "}
                   <a
-                    href="/CV_YASSINE_CHMIRROU.pdf"
+                    href="/CV__YASSINE_CHMIRROU.pdf"
                     className="text-blue-500 underline"
                     target="_blank"
                     rel="noopener noreferrer"
