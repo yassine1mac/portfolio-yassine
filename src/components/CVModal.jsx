@@ -41,7 +41,7 @@ export default function CVModal() {
                 <div className="flex items-center gap-4">
                   {/* Download Button */}
                   <a
-                    href="/cv.pdf"
+                    href="/public/cv.pdf"
                     download
                     className="flex items-center gap-2 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-lg transition"
                   >
@@ -61,7 +61,7 @@ export default function CVModal() {
 
               {/* PDF Viewer */}
               <iframe
-                src="/cv.pdf"
+                src="/public/cv.pdf"
                 title="Yassine Chmirrou CV"
                 className="w-full h-full bg-white"
               />
@@ -71,7 +71,7 @@ export default function CVModal() {
                 <p>
                   Your browser does not support PDFs.
                   <a
-                    href="/cv.pdf"
+                    href="/public/cv.pdf"
                     target="_blank"
                     rel="noopener noreferrer"
                     className="text-blue-500 underline ml-2"

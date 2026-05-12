@@ -22,7 +22,7 @@ const navLinks = [
 const socialLinks = [
   {
     icon: <FaGithub />,
-    link: "https://github.com/YassineChmirrou",
+    link: "https://github.com/yassine1mac",
     label: "GitHub",
   },
   {
@@ -115,7 +115,7 @@ export default function Footer() {
 
             {/* CV */}
             <a
-              href="/cv.pdf"
+              href="/public/cv.pdf"
               target="_blank"
               rel="noopener noreferrer"
               aria-label="CV"
