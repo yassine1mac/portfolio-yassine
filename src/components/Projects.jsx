@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaStar, FaCode } from "react-icons/fa";
+import SectionHeader from "./SectionHeader";
 
 const projects = [
   {
@@ -146,21 +147,15 @@ export default function Projects() {
         <div className="absolute bottom-40 left-10 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl"></div>
       </div>
 
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-12 relative z-10"
-      >
-        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-          Featured Projects
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto mb-8">
-          Explore my portfolio of AI and machine learning projects showcasing innovation and technical excellence
-        </p>
+      <div className="max-w-7xl mx-auto relative z-10">
+        <SectionHeader
+          eyebrow="04 · Projects"
+          title="Selected engineering work"
+          description="Production-grade AI, ML, and data systems — from deep learning pipelines to full-stack applications."
+        />
 
         {/* Category Filter */}
-        <div className="flex flex-wrap justify-center gap-2 mb-8">
+        <div className="flex flex-wrap justify-center gap-2 mb-12 -mt-6">
           {categories.map((category) => (
             <button
               key={category}
@@ -175,9 +170,8 @@ export default function Projects() {
             </button>
           ))}
         </div>
-      </motion.div>
 
-      <div className="max-w-7xl mx-auto grid gap-8 md:grid-cols-2 lg:grid-cols-3 relative z-10">
+        <div className="grid gap-8 md:grid-cols-2 lg:grid-cols-3 relative z-10">
         <AnimatePresence mode="popLayout">
           {displayedProjects.map((project, index) => (
             <motion.div
@@ -295,6 +289,7 @@ export default function Projects() {
           </button>
         </motion.div>
       )}
+      </div>
     </section>
   );
 }

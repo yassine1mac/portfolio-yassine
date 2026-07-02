@@ -2,6 +2,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaRocket, FaBrain, FaCode, FaChartLine } from "react-icons/fa";
+import SectionHeader from "./SectionHeader";
 
 const highlights = [
   {
@@ -36,25 +37,18 @@ export default function AboutMe() {
       </div>
 
       <div className="relative z-10 max-w-6xl mx-auto">
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-          className="text-center mb-16"
-        >
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent">
-            About Me
-          </h2>
-          <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            Big Data & AI Engineer | Data Scientist | Full-Stack Developer
-          </p>
-        </motion.div>
+        <SectionHeader
+          eyebrow="01 · About"
+          title="Engineered for AI at scale"
+          description="Big Data & AI Engineer · Data Scientist · Full-Stack Developer — building intelligent, production-ready systems."
+        />
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
           {/* Profile Image */}
           <motion.div
             initial={{ opacity: 0, x: -50 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
             className="relative"
           >
@@ -76,6 +70,7 @@ export default function AboutMe() {
           <motion.div
             initial={{ opacity: 0, x: 50 }}
             whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true, amount: 0.3 }}
             transition={{ duration: 0.8 }}
             className="space-y-6"
           >
@@ -112,6 +107,7 @@ export default function AboutMe() {
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true, amount: 0.2 }}
           transition={{ duration: 0.8, delay: 0.2 }}
           className="grid md:grid-cols-2 lg:grid-cols-4 gap-6"
         >
@@ -120,17 +116,19 @@ export default function AboutMe() {
               key={index}
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
+              viewport={{ once: true, amount: 0.3 }}
               transition={{ duration: 0.6, delay: index * 0.1 }}
-              whileHover={{ y: -5 }}
-              className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-xl transition-all"
+              whileHover={{ y: -5, scale: 1.02 }}
+              className="group relative bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-2xl hover:border-blue-400 dark:hover:border-blue-500 transition-all overflow-hidden"
             >
-              <div className="text-3xl text-blue-600 dark:text-blue-400 mb-4">
+              <div className="absolute -top-8 -right-8 w-24 h-24 bg-gradient-to-br from-blue-500/10 to-purple-500/10 rounded-full blur-2xl opacity-0 group-hover:opacity-100 transition-opacity"></div>
+              <div className="relative text-3xl text-blue-600 dark:text-blue-400 mb-4 group-hover:scale-110 transition-transform">
                 {item.icon}
               </div>
-              <h3 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">
+              <h3 className="relative font-bold text-lg mb-2 text-gray-900 dark:text-white">
                 {item.title}
               </h3>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
+              <p className="relative text-sm text-gray-600 dark:text-gray-400">
                 {item.description}
               </p>
             </motion.div>

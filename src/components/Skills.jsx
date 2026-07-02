@@ -1,6 +1,7 @@
 import React from "react";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
+import SectionHeader from "./SectionHeader";
 
 const skillCategories = [
   {
@@ -34,34 +35,26 @@ const skillCategories = [
 
 export default function Skills() {
   return (
-    <section className="w-full py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800" id="skills">
-      <div className="max-w-6xl mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center text-4xl font-bold mb-4 text-gray-900 dark:text-white"
-        >
-          Technical Skills
-        </motion.h2>
+    <section className="w-full py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden" id="skills">
+      {/* Grid decoration */}
+      <div className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.04)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.04)_1px,transparent_1px)] bg-[size:40px_40px] pointer-events-none"></div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 1 }}
-          className="text-center text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto"
-        >
-          Comprehensive skill set in AI, Big Data, and Full-Stack Development with hands-on project experience
-        </motion.p>
+      <div className="max-w-6xl mx-auto px-6 relative z-10">
+        <SectionHeader
+          eyebrow="02 · Skills"
+          title="Technical expertise"
+          description="Engineering-grade proficiency across the full AI/ML lifecycle — from data pipelines to model serving."
+        />
 
-        <div className="space-y-12">
+        <div className="space-y-8">
           {skillCategories.map((category, catIndex) => (
             <motion.div
               key={catIndex}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: catIndex * 0.2, duration: 0.8 }}
-              className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700"
+              viewport={{ once: true, amount: 0.15 }}
+              transition={{ delay: catIndex * 0.15, duration: 0.7 }}
+              className="bg-white dark:bg-gray-800 rounded-2xl p-8 shadow-lg border border-gray-200 dark:border-gray-700 hover:border-blue-400 dark:hover:border-blue-500 transition-colors"
             >
               <h3 className="text-2xl font-bold mb-6 text-gray-900 dark:text-white bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
                 {category.category}

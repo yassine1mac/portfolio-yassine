@@ -8,7 +8,18 @@ export default function Hero({ language }) {
 
   return (
     <section className="relative min-h-screen flex items-center justify-center px-6 py-12 bg-gradient-to-b from-blue-500 via-blue-100 to-white dark:from-gray-900 dark:via-gray-950 dark:to-gray-900 overflow-hidden">
-      {/* Animated background elements */}
+      {/* Animated grid background */}
+      <div
+        className="absolute inset-0 bg-[linear-gradient(rgba(59,130,246,0.08)_1px,transparent_1px),linear-gradient(90deg,rgba(59,130,246,0.08)_1px,transparent_1px)] bg-[size:50px_50px] pointer-events-none"
+        style={{
+          maskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 90%)",
+          WebkitMaskImage:
+            "radial-gradient(ellipse 80% 60% at 50% 40%, black 40%, transparent 90%)",
+        }}
+      ></div>
+
+      {/* Animated background orbs */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none">
         <div className="absolute top-20 left-10 w-72 h-72 bg-blue-500/10 rounded-full blur-3xl animate-pulse"></div>
         <div className="absolute bottom-20 right-10 w-96 h-96 bg-purple-500/10 rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
@@ -75,7 +86,10 @@ export default function Hero({ language }) {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="#projects"
+              href={`${import.meta.env.BASE_URL}cv.pdf`}
+              target="_blank"
+              rel="noopener noreferrer"
+              download
               className="w-full sm:w-auto flex justify-center items-center gap-2 border-2 border-blue-600 text-blue-600 dark:text-blue-400 dark:border-blue-400 px-8 py-4 rounded-full font-semibold hover:bg-blue-600 hover:text-white dark:hover:bg-blue-400 dark:hover:text-gray-900 transition-all"
             >
               <FaFilePdf /> {t.cv}

@@ -1,15 +1,16 @@
 import React from "react";
 import { motion } from "framer-motion";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
+import SectionHeader from "./SectionHeader";
 
 const testimonials = [
   {
     name: "Dr. Ahmed Benali",
-    role: "Professor at ENSIAS",
-    company: "Mohammed V University",
+    role: "Engineering Supervisor",
+    company: "ENSA Tétouan",
     image: "https://ui-avatars.com/api/?name=Ahmed+Benali&background=3b82f6&color=fff&size=128",
     rating: 5,
-    text: "Yassine demonstrated exceptional skills in machine learning and data engineering. His final year project on deep learning image classification achieved outstanding results with 97% accuracy. He has a bright future in AI."
+    text: "Yassine is a rigorous engineer with deep intuition for machine learning systems. His graduation project on deep learning image classification reached 97% accuracy and shipped as a fully containerized service. He thinks in production, not just in notebooks."
   },
   {
     name: "Sarah Martinez",
@@ -17,7 +18,7 @@ const testimonials = [
     company: "TechCorp Solutions",
     image: "https://ui-avatars.com/api/?name=Sarah+Martinez&background=8b5cf6&color=fff&size=128",
     rating: 5,
-    text: "Working with Yassine on the fraud detection system was a pleasure. His understanding of XGBoost and real-time data pipelines is impressive. He delivered production-ready code ahead of schedule."
+    text: "Working with Yassine on our fraud detection system was a pleasure. His command of XGBoost and real-time data pipelines is impressive — he delivered production-ready code ahead of schedule."
   },
   {
     name: "Mohamed Alami",
@@ -25,7 +26,7 @@ const testimonials = [
     company: "DataFlow Analytics",
     image: "https://ui-avatars.com/api/?name=Mohamed+Alami&background=ec4899&color=fff&size=128",
     rating: 5,
-    text: "Yassine's work on our ETL pipeline with Apache Airflow significantly improved our data processing efficiency. He's a quick learner and brings innovative solutions to complex problems."
+    text: "Yassine's work on our ETL pipeline with Apache Airflow significantly improved our data processing efficiency. He brings innovative solutions to complex engineering problems and communicates them clearly."
   },
   {
     name: "Emma Thompson",
@@ -33,7 +34,7 @@ const testimonials = [
     company: "AI Innovations Lab",
     image: "https://ui-avatars.com/api/?name=Emma+Thompson&background=10b981&color=fff&size=128",
     rating: 5,
-    text: "His expertise in NLP and transformer models is remarkable. The chatbot he built using LangChain and RAG exceeded our expectations. Highly recommend collaborating with Yassine!"
+    text: "His expertise in NLP and transformer models is remarkable. The RAG chatbot he built with LangChain exceeded our expectations — solid architecture, clean code, and thoughtful monitoring."
   },
   {
     name: "Hassan El Idrissi",
@@ -41,7 +42,7 @@ const testimonials = [
     company: "Smart Solutions",
     image: "https://ui-avatars.com/api/?name=Hassan+Idrissi&background=f59e0b&color=fff&size=128",
     rating: 5,
-    text: "Yassine completed the face recognition attendance system flawlessly. His attention to detail and ability to explain complex AI concepts in simple terms made the project a success."
+    text: "Yassine delivered the face recognition attendance system flawlessly. His attention to detail and ability to translate complex AI concepts into product decisions made the project a success."
   },
   {
     name: "Lisa Chen",
@@ -49,31 +50,23 @@ const testimonials = [
     company: "BioTech AI",
     image: "https://ui-avatars.com/api/?name=Lisa+Chen&background=0891b2&color=fff&size=128",
     rating: 5,
-    text: "The medical image segmentation model Yassine developed using U-Net architecture was exceptional. His analytical thinking and problem-solving skills are top-tier."
+    text: "The medical image segmentation model Yassine developed with U-Net was exceptional. His analytical thinking and problem-solving skills are top-tier — a true engineer's approach to research."
   }
 ];
 
 export default function Testimonials() {
   return (
-    <section className="w-full py-20 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900" id="testimonials">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center text-4xl font-bold mb-4 text-gray-900 dark:text-white"
-        >
-          Testimonials & Recommendations
-        </motion.h2>
+    <section className="relative w-full py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 overflow-hidden" id="testimonials">
+      {/* Soft mesh */}
+      <div className="absolute top-0 left-1/4 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-0 right-1/4 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl pointer-events-none"></div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 1 }}
-          className="text-center text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto"
-        >
-          What professors, colleagues, and clients say about working with me
-        </motion.p>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <SectionHeader
+          eyebrow="07 · Recommendations"
+          title="What people say"
+          description="Feedback from mentors, colleagues, and clients I've worked with."
+        />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {testimonials.map((testimonial, index) => (
@@ -81,7 +74,8 @@ export default function Testimonials() {
               key={index}
               initial={{ opacity: 0, y: 30 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: index * 0.1, duration: 0.6 }}
+              viewport={{ once: true, amount: 0.2 }}
+              transition={{ delay: index * 0.08, duration: 0.6 }}
               whileHover={{ y: -8 }}
               className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg border border-gray-200 dark:border-gray-700 relative group hover:shadow-2xl transition-all"
             >

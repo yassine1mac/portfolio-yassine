@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin, FaWhatsapp, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import SectionHeader from "./SectionHeader";
 
 export default function Contact() {
   const [formData, setFormData] = useState({
@@ -103,25 +104,17 @@ export default function Contact() {
   ];
 
   return (
-    <section className="w-full py-20 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900" id="contact">
-      <div className="max-w-7xl mx-auto px-6">
-        <motion.h2
-          initial={{ opacity: 0, y: 30 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 1 }}
-          className="text-center text-4xl font-bold mb-4 text-gray-900 dark:text-white"
-        >
-          Get In Touch
-        </motion.h2>
+    <section className="relative w-full py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 overflow-hidden" id="contact">
+      {/* Decoration */}
+      <div className="absolute top-20 -right-20 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl pointer-events-none"></div>
+      <div className="absolute bottom-20 -left-20 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl pointer-events-none"></div>
 
-        <motion.p
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ delay: 0.2, duration: 1 }}
-          className="text-center text-gray-600 dark:text-gray-400 mb-16 max-w-2xl mx-auto"
-        >
-          Have a project in mind or want to collaborate? Feel free to reach out!
-        </motion.p>
+      <div className="max-w-7xl mx-auto px-6 relative z-10">
+        <SectionHeader
+          eyebrow="08 · Contact"
+          title="Let's build something together"
+          description="Open to engineering roles, freelance projects, and R&D collaborations in AI, ML, and Data Engineering."
+        />
 
         <div className="grid lg:grid-cols-2 gap-12">
           {/* Contact Info */}

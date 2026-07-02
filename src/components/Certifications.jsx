@@ -3,6 +3,7 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaExternalLinkAlt, FaAward, FaCertificate } from "react-icons/fa";
 import { SiCoursera, SiKaggle, SiDatacamp, SiUdemy, SiGoogle } from "react-icons/si";
+import SectionHeader from "./SectionHeader";
 
 const certifications = [
   {
@@ -42,37 +43,44 @@ const certifications = [
     provider: "Google",
     icon: <SiGoogle className="text-3xl text-orange-500" />,
     skills: ["TensorFlow", "Keras", "Model Deployment"],
-    date: "2024",
-    status: "in-progress"
+    date: "2025",
+    status: "completed"
   },
   {
     title: "AWS Machine Learning",
     provider: "Amazon Web Services",
     icon: <FaCertificate className="text-3xl text-yellow-500" />,
     skills: ["SageMaker", "Lambda", "S3", "EC2"],
-    date: "2024",
+    date: "2025",
     status: "in-progress"
+  },
+  {
+    title: "Engineer's Degree — Big Data & AI",
+    provider: "ENSA Tétouan",
+    icon: <FaAward className="text-3xl text-blue-500" />,
+    skills: ["Machine Learning", "Big Data", "Cloud", "MLOps"],
+    date: "2025",
+    status: "completed"
   }
 ];
 
 export default function Certifications() {
   return (
-    <section id="certifications" className="bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-24 px-6 text-gray-800 dark:text-gray-100">
-      <motion.div
-        initial={{ opacity: 0, y: 20 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-center mb-16"
-      >
-        <h2 className="text-4xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-purple-600 to-pink-600 bg-clip-text text-transparent mb-4">
-          Certifications
-        </h2>
-        <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-          Continuous learning and professional development in AI, ML, and Data Science
-        </p>
-      </motion.div>
+    <section
+      id="certifications"
+      className="relative bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 py-24 px-6 text-gray-800 dark:text-gray-100 overflow-hidden"
+    >
+      {/* Dot-grid decoration */}
+      <div className="absolute inset-0 bg-[radial-gradient(circle,rgba(59,130,246,0.08)_1px,transparent_1px)] bg-[size:24px_24px] pointer-events-none opacity-40"></div>
 
-      <div className="max-w-6xl mx-auto grid gap-6 md:grid-cols-2 lg:grid-cols-3">
+      <div className="max-w-6xl mx-auto relative z-10">
+        <SectionHeader
+          eyebrow="06 · Credentials"
+          title="Certifications & degree"
+          description="Formal recognition of the skills I bring to production AI systems."
+        />
+
+        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
         {certifications.map((cert, i) => (
           <motion.div
             key={i}
@@ -129,6 +137,7 @@ export default function Certifications() {
             <div className="absolute inset-x-0 bottom-0 h-1 bg-gradient-to-r from-blue-500 via-purple-500 to-pink-500 transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
           </motion.div>
         ))}
+        </div>
       </div>
     </section>
   );

@@ -9,6 +9,7 @@ import ErrorBoundary from "./components/ErrorBoundary";
 import LoadingScreen from "./components/LoadingScreen";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollProgress from "./components/ScrollProgress";
+import SectionRail from "./components/SectionRail";
 import WaveSeparator from "./components/WaveSeparator";
 import LanguageToggle from "./components/LanguageToggle";
 
@@ -21,7 +22,6 @@ const AboutMe = lazy(() => import('./components/AboutMe'));
 const Testimonials = lazy(() => import('./components/Testimonials'));
 const Contact = lazy(() => import('./components/Contact'));
 const Projects = lazy(() => import('./components/Projects'));
-const CVModal = lazy(() => import('./components/CVModal'));
 
 // Section loading fallback
 function SectionLoader() {
@@ -82,6 +82,9 @@ export default function App() {
             {/* Reading progress bar */}
             <ScrollProgress />
 
+            {/* Right-side section rail (desktop only) */}
+            <SectionRail />
+
             {/* Navigation */}
             <Navbar theme={theme} setTheme={setTheme} />
             <LanguageToggle language={language} setLanguage={setLanguage} />
@@ -92,51 +95,53 @@ export default function App() {
               <Hero language={language} />
               <WaveSeparator />
 
-              {/* Lazy-loaded sections wrapped in Suspense */}
-              <Suspense fallback={<SectionLoader />}>
-                <Timeline />
-              </Suspense>
-              <WaveSeparator flip />
-
-              <Suspense fallback={<SectionLoader />}>
-                <Certifications />
-              </Suspense>
-              <WaveSeparator />
-
-              <Suspense fallback={<SectionLoader />}>
-                <TechStack />
-              </Suspense>
-              <WaveSeparator flip />
-
-              <Suspense fallback={<SectionLoader />}>
-                <Skills />
-              </Suspense>
-              <WaveSeparator />
-
-              <Suspense fallback={<SectionLoader />}>
-                <Projects />
-              </Suspense>
-              <WaveSeparator flip />
-
-              <Suspense fallback={<SectionLoader />}>
-                <Testimonials />
-              </Suspense>
-              <WaveSeparator />
-
+              {/* 01 · About — who I am */}
               <Suspense fallback={<SectionLoader />}>
                 <AboutMe />
               </Suspense>
               <WaveSeparator flip />
 
+              {/* 02 · Skills — what I can do */}
+              <Suspense fallback={<SectionLoader />}>
+                <Skills />
+              </Suspense>
+              <WaveSeparator />
+
+              {/* 03 · Tech Stack — tools I use */}
+              <Suspense fallback={<SectionLoader />}>
+                <TechStack />
+              </Suspense>
+              <WaveSeparator flip />
+
+              {/* 04 · Projects — what I've built */}
+              <Suspense fallback={<SectionLoader />}>
+                <Projects />
+              </Suspense>
+              <WaveSeparator />
+
+              {/* 05 · Timeline — my journey */}
+              <Suspense fallback={<SectionLoader />}>
+                <Timeline />
+              </Suspense>
+              <WaveSeparator flip />
+
+              {/* 06 · Certifications — credentials */}
+              <Suspense fallback={<SectionLoader />}>
+                <Certifications />
+              </Suspense>
+              <WaveSeparator />
+
+              {/* 07 · Testimonials — social proof */}
+              <Suspense fallback={<SectionLoader />}>
+                <Testimonials />
+              </Suspense>
+              <WaveSeparator flip />
+
+              {/* 08 · Contact — let's talk */}
               <Suspense fallback={<SectionLoader />}>
                 <Contact />
               </Suspense>
             </main>
-
-            {/* CV Modal */}
-            <Suspense fallback={null}>
-              <CVModal />
-            </Suspense>
 
             {/* Footer */}
             <Footer />
