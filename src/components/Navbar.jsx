@@ -5,15 +5,35 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function Navbar({ theme, setTheme }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const [activeSection, setActiveSection] = useState("");
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
 
   const navLinks = [
-    { name: "About", href: "#about" },
-    { name: "Projects", href: "#projects" },
-    { name: "Skills", href: "#skills" },
-    { name: "Contact", href: "#contact" },
+    { name: "About", href: "#about", id: "about" },
+    { name: "Projects", href: "#projects", id: "projects" },
+    { name: "Skills", href: "#skills", id: "skills" },
+    { name: "Contact", href: "#contact", id: "contact" },
   ];
+
+  // Track active section as user scrolls
+  useEffect(() => {
+    const ids = navLinks.map((l) => l.id);
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) setActiveSection(entry.target.id);
+        });
+      },
+      { rootMargin: "-40% 0px -55% 0px", threshold: 0 }
+    );
+    ids.forEach((id) => {
+      const el = document.getElementById(id);
+      if (el) observer.observe(el);
+    });
+    return () => observer.disconnect();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   // Handle scroll effect
   useEffect(() => {
@@ -71,17 +91,29 @@ export default function Navbar({ theme, setTheme }) {
 
           {/* Desktop Navigation */}
           <div className="hidden md:flex space-x-1 text-sm font-medium" role="menubar">
-            {navLinks.map((link) => (
-              <a
-                key={link.name}
-                href={link.href}
-                className="relative px-4 py-2 text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400 transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 group"
-                role="menuitem"
-              >
-                {link.name}
-                <span className="absolute bottom-0 left-1/2 -translate-x-1/2 w-0 h-0.5 bg-blue-500 group-hover:w-1/2 transition-all duration-300"></span>
-              </a>
-            ))}
+            {navLinks.map((link) => {
+              const isActive = activeSection === link.id;
+              return (
+                <a
+                  key={link.name}
+                  href={link.href}
+                  aria-current={isActive ? "page" : undefined}
+                  className={`relative px-4 py-2 transition-colors rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-500 group ${
+                    isActive
+                      ? "text-blue-600 dark:text-blue-400"
+                      : "text-gray-700 dark:text-gray-300 hover:text-blue-600 dark:hover:text-blue-400"
+                  }`}
+                  role="menuitem"
+                >
+                  {link.name}
+                  <span
+                    className={`absolute bottom-0 left-1/2 -translate-x-1/2 h-0.5 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full transition-all duration-300 ${
+                      isActive ? "w-2/3" : "w-0 group-hover:w-1/2"
+                    }`}
+                  ></span>
+                </a>
+              );
+            })}
           </div>
 
           {/* Right Buttons */}

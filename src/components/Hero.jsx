@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaWhatsapp, FaFilePdf, FaGraduationCap } from "react-icons/fa";
+import { FaWhatsapp, FaFilePdf, FaGraduationCap, FaChevronDown } from "react-icons/fa";
 import translations from "../translations";
 
 export default function Hero({ language }) {
@@ -178,6 +178,25 @@ export default function Hero({ language }) {
         </motion.div>
 
       </div>
+
+      {/* Scroll hint */}
+      <motion.a
+        href="#timeline"
+        aria-label="Scroll to next section"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ delay: 1.2, duration: 0.8 }}
+        className="hidden md:flex absolute bottom-6 left-1/2 -translate-x-1/2 flex-col items-center gap-2 text-gray-500 dark:text-gray-400 hover:text-blue-600 dark:hover:text-blue-400 transition-colors z-20"
+      >
+        <span className="text-[10px] uppercase tracking-[0.25em]">Scroll</span>
+        <motion.span
+          animate={{ y: [0, 8, 0] }}
+          transition={{ duration: 1.8, repeat: Infinity, ease: "easeInOut" }}
+          className="text-lg"
+        >
+          <FaChevronDown />
+        </motion.span>
+      </motion.a>
     </section>
   );
 }

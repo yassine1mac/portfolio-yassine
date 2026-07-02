@@ -8,6 +8,7 @@ import Footer from "./components/Footer";
 import ErrorBoundary from "./components/ErrorBoundary";
 import LoadingScreen from "./components/LoadingScreen";
 import ScrollToTop from "./components/ScrollToTop";
+import ScrollProgress from "./components/ScrollProgress";
 import WaveSeparator from "./components/WaveSeparator";
 import LanguageToggle from "./components/LanguageToggle";
 
@@ -78,6 +79,9 @@ export default function App() {
             transition={{ duration: 0.5 }}
             className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 min-h-screen text-white font-sans"
           >
+            {/* Reading progress bar */}
+            <ScrollProgress />
+
             {/* Navigation */}
             <Navbar theme={theme} setTheme={setTheme} />
             <LanguageToggle language={language} setLanguage={setLanguage} />
