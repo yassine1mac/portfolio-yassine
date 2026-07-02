@@ -80,8 +80,8 @@ export default function Footer() {
             </h2>
 
             <p className="text-gray-400 mt-2 max-w-md">
-              Big Data & AI Engineer passionate about AI, Full Stack
-              Development, and modern web experiences.
+              Big Data & AI Engineer — building intelligent systems, scalable
+              data pipelines, and production-ready AI solutions.
             </p>
 
             {/* Navigation */}

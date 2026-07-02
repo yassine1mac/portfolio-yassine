@@ -46,7 +46,7 @@ export default function AboutMe() {
             About Me
           </h2>
           <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
-            AI Engineer | Data Scientist | Full-Stack Developer
+            Big Data & AI Engineer | Data Scientist | Full-Stack Developer
           </p>
         </motion.div>
 
@@ -65,7 +65,7 @@ export default function AboutMe() {
               {/* Image */}
               <img
                 src={`${import.meta.env.BASE_URL}profile-yassine.jpg`}
-                alt="Yassine Chmirrou - AI & Machine Learning Engineer"
+                alt="Yassine Chmirrou - Big Data & AI Engineer"
                 className="relative z-10 w-full rounded-2xl shadow-2xl ring-4 ring-white/20 dark:ring-gray-700/30"
                 loading="lazy"
               />
@@ -80,19 +80,19 @@ export default function AboutMe() {
             className="space-y-6"
           >
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              I'm a <span className="font-bold text-blue-600 dark:text-blue-400">5th-year Engineering student</span> specializing in <span className="font-semibold">Data Science, Big Data, and Artificial Intelligence</span> at ENSA Tétouan, Morocco.
+              I'm a <span className="font-bold text-blue-600 dark:text-blue-400">graduate Engineer</span> in <span className="font-semibold">Data Science, Big Data, and Artificial Intelligence</span> from ENSA Tétouan, Morocco — <span className="font-semibold">Class of 2025</span>.
             </p>
 
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              My expertise spans the <span className="font-semibold">entire AI/ML pipeline</span>: from data collection and preprocessing to model deployment and monitoring. I've built production-grade systems for computer vision, natural language processing, and real-time data analytics.
+              My expertise spans the <span className="font-semibold">entire AI/ML pipeline</span>: from data collection and preprocessing to model deployment and monitoring. I build production-grade systems for computer vision, natural language processing, and real-time data analytics.
             </p>
 
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              As <span className="font-bold text-purple-600 dark:text-purple-400">Vice President of AI Geeks Club</span>, I lead technical workshops, organize hackathons, and mentor students in machine learning and software engineering.
+              As former <span className="font-bold text-purple-600 dark:text-purple-400">Vice President of AI Geeks Club</span>, I led technical workshops, organized hackathons, and mentored students in machine learning and software engineering.
             </p>
 
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              I'm passionate about building <span className="font-semibold">scalable AI solutions</span> that solve real-world problems. Whether it's optimizing data pipelines with Apache Spark, deploying ML models with Docker and Kubernetes, or building intelligent web applications, I focus on creating impact through technology.
+              I'm passionate about building <span className="font-semibold">scalable AI solutions</span> that solve real-world problems — whether it's optimizing data pipelines with Apache Spark, deploying ML models with Docker and Kubernetes, or shipping intelligent web applications. Now open to <span className="font-bold text-green-600 dark:text-green-400">engineering opportunities</span> in AI, ML, and Data Engineering.
             </p>
 
             <motion.div

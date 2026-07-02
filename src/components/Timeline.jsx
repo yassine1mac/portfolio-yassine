@@ -4,16 +4,22 @@ import { motion } from "framer-motion";
 
 const timelineData = [
   {
-    title: "ENSA Tétouan",
-    subtitle: "Engineering Degree - Data Science, Big Data & AI (5th Year)",
+    title: "Big Data & AI Engineer",
+    subtitle: "Open to opportunities · Freelance & Research",
+    date: "2025 – Present",
+    description: "Newly graduated engineer specialized in Big Data and Artificial Intelligence. Delivering end-to-end AI solutions: from data ingestion and distributed processing (Spark, Kafka) to model training, deployment, and MLOps. Available for full-time roles, freelance projects, and R&D collaborations."
+  },
+  {
+    title: "ENSA Tétouan — Engineer's Degree",
+    subtitle: "Data Science, Big Data & Artificial Intelligence · Graduated",
     date: "2020 – 2025",
-    description: "Advanced studies in machine learning, deep learning, big data architectures, cloud computing, and distributed systems. GPA-focused curriculum with hands-on projects in NLP, computer vision, and data engineering."
+    description: "5-year Engineering program (Diplôme d'Ingénieur d'État) in Data Science, Big Data, and AI. Coursework: machine learning, deep learning, distributed systems, cloud computing, data engineering, and MLOps. Graduated in 2025 with hands-on projects in NLP, computer vision, and real-time analytics."
   },
   {
     title: "AI Geeks Club",
     subtitle: "Vice President & Technical Lead",
-    date: "2024 – Present",
-    description: "Leading a team of 50+ members. Organizing technical workshops on MLOps, organizing hackathons, and mentoring students in AI/ML. Spearheaded collaboration with industry partners for real-world AI projects."
+    date: "2024 – 2025",
+    description: "Led a team of 50+ members. Organized technical workshops on MLOps, hackathons, and mentored students in AI/ML. Spearheaded collaboration with industry partners for real-world AI projects."
   },
   {
     title: "Transparence Informatique",

@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaWhatsapp, FaFilePdf } from "react-icons/fa";
+import { FaWhatsapp, FaFilePdf, FaGraduationCap } from "react-icons/fa";
 import translations from "../translations";
 
 export default function Hero({ language }) {
@@ -19,7 +19,16 @@ export default function Hero({ language }) {
 
         {/* Texte principal */}
         <div className="w-full text-center md:text-left">
-          <motion.div className="inline-block mb-4">
+          <motion.div
+            initial={{ opacity: 0, y: -10 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.5 }}
+            className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 text-green-600 dark:text-green-400 text-xs sm:text-sm font-semibold"
+          >
+            <FaGraduationCap /> Graduate Engineer · Class of 2025
+          </motion.div>
+
+          <motion.div className="block mb-4">
             <div
               className="text-blue-600 text-xl sm:text-2xl font-bold"
               style={{ fontFamily: "Comic Sans MS, cursive" }}
@@ -85,11 +94,11 @@ export default function Hero({ language }) {
               <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Projects</div>
             </div>
             <div className="text-center border-x border-gray-300 dark:border-gray-700">
-              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">3+</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Years Exp</div>
+              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">2025</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Engineer Degree</div>
             </div>
             <div className="text-center">
-              <div className="text-3xl font-bold text-pink-600 dark:text-pink-400">10+</div>
+              <div className="text-3xl font-bold text-pink-600 dark:text-pink-400">15+</div>
               <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Tech Stack</div>
             </div>
           </motion.div>
@@ -132,7 +141,7 @@ export default function Hero({ language }) {
             <div className="relative z-10 rounded-full overflow-hidden ring-4 ring-white/20 dark:ring-gray-700/30 backdrop-blur-sm shadow-2xl">
               <img
                 src={`${import.meta.env.BASE_URL}profile-yassine.jpg`}
-                alt="Yassine Chmirrou - AI & Machine Learning Engineer"
+                alt="Yassine Chmirrou - Big Data & AI Engineer"
                 className="w-full h-full object-cover transition-all duration-500 ease-in-out hover:scale-110"
                 loading="eager"
               />
