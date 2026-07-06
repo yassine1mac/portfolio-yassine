@@ -143,12 +143,7 @@ export default function Footer() {
           className="mt-8 text-center space-y-3"
         >
           <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-            Built with <FaReact className="text-cyan-400" /> React & Tailwind
-            CSS
-          </p>
-
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-            © {year} Yassine Chmirrou — Made with{" "}
+            © {year} Yassine Chmirrou
             <FaHeart className="text-red-500" />
           </p>
 
