@@ -86,7 +86,7 @@ export default function App() {
             <SectionRail />
 
             {/* Navigation */}
-            <Navbar theme={theme} setTheme={setTheme} />
+            <Navbar theme={theme} setTheme={setTheme} language={language} />
             <LanguageToggle language={language} setLanguage={setLanguage} />
 
             {/* Main Content */}
@@ -97,54 +97,54 @@ export default function App() {
 
               {/* 01 · About — who I am */}
               <Suspense fallback={<SectionLoader />}>
-                <AboutMe />
+                <AboutMe language={language} />
               </Suspense>
               <WaveSeparator flip />
 
               {/* 02 · Skills — what I can do */}
               <Suspense fallback={<SectionLoader />}>
-                <Skills />
+                <Skills language={language} />
               </Suspense>
               <WaveSeparator />
 
               {/* 03 · Tech Stack — tools I use */}
               <Suspense fallback={<SectionLoader />}>
-                <TechStack />
+                <TechStack language={language} />
               </Suspense>
               <WaveSeparator flip />
 
               {/* 04 · Projects — what I've built */}
               <Suspense fallback={<SectionLoader />}>
-                <Projects />
+                <Projects language={language} />
               </Suspense>
               <WaveSeparator />
 
               {/* 05 · Timeline — my journey */}
               <Suspense fallback={<SectionLoader />}>
-                <Timeline />
+                <Timeline language={language} />
               </Suspense>
               <WaveSeparator flip />
 
               {/* 06 · Certifications — credentials */}
               <Suspense fallback={<SectionLoader />}>
-                <Certifications />
+                <Certifications language={language} />
               </Suspense>
               <WaveSeparator />
 
               {/* 07 · Testimonials — social proof */}
               <Suspense fallback={<SectionLoader />}>
-                <Testimonials />
+                <Testimonials language={language} />
               </Suspense>
               <WaveSeparator flip />
 
               {/* 08 · Contact — let's talk */}
               <Suspense fallback={<SectionLoader />}>
-                <Contact />
+                <Contact language={language} />
               </Suspense>
             </main>
 
             {/* Footer */}
-            <Footer />
+            <Footer language={language} />
 
             {/* Scroll to top button */}
             <ScrollToTop />
