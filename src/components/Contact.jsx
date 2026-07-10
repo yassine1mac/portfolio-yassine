@@ -1,9 +1,11 @@
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import { FaEnvelope, FaPhone, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin, FaWhatsapp, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
+import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin, FaWhatsapp, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
 import SectionHeader from "./SectionHeader";
+import translations from "../translations";
 
-export default function Contact() {
+export default function Contact({ language = "en" }) {
+  const t = translations[language].contact;
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -16,17 +18,17 @@ export default function Contact() {
 
   const validateForm = () => {
     const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = "Name is required";
+    if (!formData.name.trim()) newErrors.name = t.form.errors.nameRequired;
     if (!formData.email.trim()) {
-      newErrors.email = "Email is required";
+      newErrors.email = t.form.errors.emailRequired;
     } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = "Please enter a valid email";
+      newErrors.email = t.form.errors.emailInvalid;
     }
-    if (!formData.subject.trim()) newErrors.subject = "Subject is required";
+    if (!formData.subject.trim()) newErrors.subject = t.form.errors.subjectRequired;
     if (!formData.message.trim()) {
-      newErrors.message = "Message is required";
+      newErrors.message = t.form.errors.messageRequired;
     } else if (formData.message.trim().length < 10) {
-      newErrors.message = "Message must be at least 10 characters";
+      newErrors.message = t.form.errors.messageShort;
     }
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
@@ -79,20 +81,20 @@ export default function Contact() {
   const contactInfo = [
     {
       icon: <FaEnvelope className="text-2xl" />,
-      title: "Email",
+      title: t.email,
       value: "yassinechmirrou1@gmail.com",
       link: "mailto:yassinechmirrou1@gmail.com"
     },
     {
       icon: <FaWhatsapp className="text-2xl" />,
-      title: "WhatsApp",
+      title: t.whatsapp,
       value: "+212 620 305 398",
       link: "https://wa.me/212620305398"
     },
     {
       icon: <FaMapMarkerAlt className="text-2xl" />,
-      title: "Location",
-      value: "Tétouan, Morocco",
+      title: t.location,
+      value: t.locationValue,
       link: null
     }
   ];
@@ -111,9 +113,9 @@ export default function Contact() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader
-          eyebrow="08 · Contact"
-          title="Let's build something together"
-          description="Open to engineering roles, freelance projects, and R&D collaborations in AI, ML, and Data Engineering."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         <div className="grid lg:grid-cols-2 gap-12">
@@ -125,9 +127,9 @@ export default function Contact() {
             className="space-y-8"
           >
             <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-8 rounded-2xl text-white">
-              <h3 className="text-2xl font-bold mb-6">Contact Information</h3>
+              <h3 className="text-2xl font-bold mb-6">{t.infoTitle}</h3>
               <p className="mb-8 text-white/80">
-                Let's discuss your next big idea or just say hello!
+                {t.infoIntro}
               </p>
 
               <div className="space-y-6">
@@ -159,7 +161,7 @@ export default function Contact() {
               </div>
 
               <div className="mt-12">
-                <p className="text-sm text-white/70 mb-4">Follow me on</p>
+                <p className="text-sm text-white/70 mb-4">{t.followMe}</p>
                 <div className="flex gap-4">
                   {socialLinks.map((social, index) => (
                     <motion.a
@@ -185,9 +187,9 @@ export default function Contact() {
               transition={{ delay: 0.4, duration: 0.8 }}
               className="bg-gray-100 dark:bg-gray-800 p-6 rounded-2xl"
             >
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">Quick Response</h4>
+              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{t.quickResponseTitle}</h4>
               <p className="text-sm text-gray-600 dark:text-gray-400">
-                I typically respond within 24 hours. For urgent matters, please reach out via WhatsApp.
+                {t.quickResponseBody}
               </p>
             </motion.div>
           </motion.div>
@@ -201,7 +203,7 @@ export default function Contact() {
             <form onSubmit={handleSubmit} className="space-y-6" noValidate>
               <div>
                 <label htmlFor="name" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Your Name <span className="text-red-500">*</span>
+                  {t.form.name} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -210,7 +212,7 @@ export default function Contact() {
                   value={formData.name}
                   onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none`}
-                  placeholder="John Doe"
+                  placeholder={t.form.namePlaceholder}
                   aria-describedby={errors.name ? "name-error" : undefined}
                   aria-invalid={errors.name ? "true" : "false"}
                 />
@@ -223,7 +225,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="email" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Email Address <span className="text-red-500">*</span>
+                  {t.form.email} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="email"
@@ -232,7 +234,7 @@ export default function Contact() {
                   value={formData.email}
                   onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none`}
-                  placeholder="john@example.com"
+                  placeholder={t.form.emailPlaceholder}
                   aria-describedby={errors.email ? "email-error" : undefined}
                   aria-invalid={errors.email ? "true" : "false"}
                 />
@@ -245,7 +247,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="subject" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Subject <span className="text-red-500">*</span>
+                  {t.form.subject} <span className="text-red-500">*</span>
                 </label>
                 <input
                   type="text"
@@ -254,7 +256,7 @@ export default function Contact() {
                   value={formData.subject}
                   onChange={handleChange}
                   className={`w-full px-4 py-3 rounded-lg border ${errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none`}
-                  placeholder="Project Collaboration"
+                  placeholder={t.form.subjectPlaceholder}
                   aria-describedby={errors.subject ? "subject-error" : undefined}
                   aria-invalid={errors.subject ? "true" : "false"}
                 />
@@ -267,7 +269,7 @@ export default function Contact() {
 
               <div>
                 <label htmlFor="message" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  Message <span className="text-red-500">*</span>
+                  {t.form.message} <span className="text-red-500">*</span>
                 </label>
                 <textarea
                   id="message"
@@ -276,7 +278,7 @@ export default function Contact() {
                   onChange={handleChange}
                   rows="6"
                   className={`w-full px-4 py-3 rounded-lg border ${errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-none`}
-                  placeholder="Tell me about your project..."
+                  placeholder={t.form.messagePlaceholder}
                   aria-describedby={errors.message ? "message-error" : undefined}
                   aria-invalid={errors.message ? "true" : "false"}
                 />
@@ -298,15 +300,15 @@ export default function Contact() {
                 {status === "sending" ? (
                   <>
                     <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" aria-hidden="true"></div>
-                    Sending...
+                    {t.form.sending}
                   </>
                 ) : status === "success" ? (
                   <>
-                    <FaCheckCircle aria-hidden="true" /> Message Sent!
+                    <FaCheckCircle aria-hidden="true" /> {t.form.sent}
                   </>
                 ) : (
                   <>
-                    <FaPaperPlane aria-hidden="true" /> Send Message
+                    <FaPaperPlane aria-hidden="true" /> {t.form.send}
                   </>
                 )}
               </motion.button>
@@ -319,7 +321,7 @@ export default function Contact() {
                   role="alert"
                 >
                   <p className="text-center text-green-700 dark:text-green-400 font-semibold flex items-center justify-center gap-2">
-                    <FaCheckCircle /> Thank you! I'll get back to you soon.
+                    <FaCheckCircle /> {t.form.success}
                   </p>
                 </motion.div>
               )}
@@ -332,7 +334,7 @@ export default function Contact() {
                   role="alert"
                 >
                   <p className="text-center text-red-700 dark:text-red-400 font-semibold flex items-center justify-center gap-2">
-                    <FaExclamationCircle /> Something went wrong. Please try again or contact me directly.
+                    <FaExclamationCircle /> {t.form.error}
                   </p>
                 </motion.div>
               )}

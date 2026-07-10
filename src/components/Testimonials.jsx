@@ -2,7 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaQuoteLeft, FaStar } from "react-icons/fa";
 import SectionHeader from "./SectionHeader";
+import translations from "../translations";
 
+// TODO Yassine: replace these placeholder testimonials with real ones from
+// your PFE supervisor at AgriData, OCP tutors, or freelance clients (VOLTA,
+// maritime tourism fleet). The current entries are placeholders left over from
+// the initial portfolio scaffold — they still reference removed projects.
 const testimonials = [
   {
     name: "Dr. Ahmed Benali",
@@ -54,7 +59,8 @@ const testimonials = [
   }
 ];
 
-export default function Testimonials() {
+export default function Testimonials({ language = "en" }) {
+  const t = translations[language].testimonials;
   return (
     <section className="relative w-full py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-800 dark:to-gray-900 overflow-hidden" id="testimonials">
       {/* Soft mesh */}
@@ -63,9 +69,9 @@ export default function Testimonials() {
 
       <div className="max-w-7xl mx-auto px-6 relative z-10">
         <SectionHeader
-          eyebrow="07 · Recommendations"
-          title="What people say"
-          description="Feedback from mentors, colleagues, and clients I've worked with."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
@@ -124,7 +130,7 @@ export default function Testimonials() {
           className="mt-16 text-center"
         >
           <p className="text-gray-600 dark:text-gray-400 mb-6">
-            Want to work together or leave a recommendation?
+            {t.cta}
           </p>
           <motion.a
             href="#contact"
@@ -132,7 +138,7 @@ export default function Testimonials() {
             whileTap={{ scale: 0.95 }}
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl transition-all"
           >
-            Get In Touch
+            {t.ctaButton}
           </motion.a>
         </motion.div>
       </div>
