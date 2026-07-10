@@ -1,38 +1,78 @@
-body {
-  margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
-}
-
-code {
-  font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-    monospace;
-}
-
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-/* Smooth scrolling + offset for the fixed navbar */
+/* ---------- Design tokens ---------- */
+:root {
+  --ink: #101E33;
+  --paper: #F7F8FA;
+  --navy: #16324F;
+  --console: #0C1626;
+  --surface-2: #12233A;
+  --accent: #1A4BC7;
+  --accent-bright: #3E6BD8;
+  --terminal: #2BD576;
+  --slate: #5A6B7B;
+
+  --bg: var(--paper);
+  --fg: var(--ink);
+  --fg-muted: var(--slate);
+  --surface: #FFFFFF;
+  --surface-alt: #EEF1F6;
+  --hairline: rgba(16, 30, 51, 0.08);
+  --hairline-strong: rgba(16, 30, 51, 0.14);
+}
+
+html.dark {
+  --bg: var(--ink);
+  --fg: #E6ECF3;
+  --fg-muted: #8FA0B3;
+  --surface: var(--surface-2);
+  --surface-alt: #0F1E31;
+  --hairline: rgba(255, 255, 255, 0.08);
+  --hairline-strong: rgba(255, 255, 255, 0.16);
+}
+
+/* ---------- Base ---------- */
 html {
   scroll-behavior: smooth;
   scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
 }
 
-/* Anchored sections respect the navbar height */
+body {
+  margin: 0;
+  background-color: var(--bg);
+  color: var(--fg);
+  font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif;
+  font-size: 1rem;
+  line-height: 1.65;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  font-feature-settings: "cv11", "ss01", "ss03";
+  overflow-x: hidden;
+  transition: background-color 200ms ease, color 200ms ease;
+}
+
 section[id] {
   scroll-margin-top: 5rem;
 }
 
-/* Respect the user's motion preference */
+::selection {
+  background-color: rgba(26, 75, 199, 0.25);
+  color: var(--fg);
+}
+
+/* Focus */
+:focus-visible {
+  outline: 2px solid var(--accent);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+/* Reduced motion */
 @media (prefers-reduced-motion: reduce) {
-  html {
-    scroll-behavior: auto;
-  }
+  html { scroll-behavior: auto; }
   *,
   *::before,
   *::after {
@@ -43,131 +83,87 @@ section[id] {
   }
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 10px;
-}
-
-::-webkit-scrollbar-track {
-  background: #0f172a;
-}
-
+/* ---------- Scrollbar ---------- */
+::-webkit-scrollbar { width: 10px; height: 10px; }
+::-webkit-scrollbar-track { background: var(--bg); }
 ::-webkit-scrollbar-thumb {
-  background: linear-gradient(180deg, #3b82f6, #8b5cf6);
+  background: var(--hairline-strong);
   border-radius: 6px;
-  border: 2px solid #0f172a;
+  border: 2px solid var(--bg);
+}
+::-webkit-scrollbar-thumb:hover { background: var(--accent); }
+
+/* ---------- Typography utilities ---------- */
+.font-display { font-family: "Bricolage Grotesque", system-ui, sans-serif; letter-spacing: -0.02em; }
+.font-mono { font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace; }
+
+.h-hero {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 800;
+  font-size: clamp(2.6rem, 5vw + 1rem, 4.5rem);
+  line-height: 1.02;
+  letter-spacing: -0.02em;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(180deg, #2563eb, #7c3aed);
+.h-section {
+  font-family: "Bricolage Grotesque", system-ui, sans-serif;
+  font-weight: 700;
+  font-size: clamp(1.9rem, 2vw + 1rem, 2.6rem);
+  line-height: 1.1;
+  letter-spacing: -0.02em;
 }
 
-@keyframes zoom-slow {
-  0% {
-    transform: scale(1.05);
-  }
-  50% {
-    transform: scale(1.1);
-  }
-  100% {
-    transform: scale(1.05);
-  }
-}
-.animate-zoom-slow {
-  animation: zoom-slow 15s ease-in-out infinite;
+.eyebrow {
+  font-family: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--accent);
 }
 
-
-@keyframes gradient {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-.animate-\[gradient_15s_ease_infinite\] {
-  background-size: 200% 200%;
-  animation: gradient 15s ease infinite;
-}
-
-/* 3D Effects and Perspective */
-.perspective-1000 {
-  perspective: 1000px;
-}
-
-.preserve-3d {
-  transform-style: preserve-3d;
-}
-
-/* Glassmorphism */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-.glass-dark {
-  background: rgba(0, 0, 0, 0.2);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.1);
-}
-
-/* Floating animation */
-@keyframes float {
-  0%, 100% {
-    transform: translateY(0px);
-  }
-  50% {
-    transform: translateY(-20px);
-  }
-}
-
-.animate-float {
-  animation: float 3s ease-in-out infinite;
-}
-
-/* Gradient text */
-.gradient-text {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  background-clip: text;
-}
-
-/* Shine effect */
-@keyframes shine {
-  0% {
-    background-position: -200% center;
-  }
-  100% {
-    background-position: 200% center;
-  }
-}
-
-.shine {
-  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
-  background-size: 200% 100%;
-  animation: shine 3s infinite;
-}
-
-/* Line clamp utilities */
+/* ---------- Line clamp ---------- */
 .line-clamp-3 {
   display: -webkit-box;
   -webkit-line-clamp: 3;
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
-
-/* Smooth transitions */
-* {
-  transition-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+.line-clamp-4 {
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
-/* Enhanced shadows */
-.shadow-glow {
-  box-shadow: 0 0 20px rgba(59, 130, 246, 0.3),
-              0 0 40px rgba(147, 51, 234, 0.2);
+/* ---------- Reveal on scroll (used by useReveal hook) ---------- */
+.reveal {
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 400ms ease, transform 400ms ease;
+  will-change: opacity, transform;
+}
+.reveal.is-visible {
+  opacity: 1;
+  transform: translateY(0);
 }
 
-.shadow-glow:hover {
-  box-shadow: 0 0 30px rgba(59, 130, 246, 0.5),
-              0 0 60px rgba(147, 51, 234, 0.3);
+/* ---------- Terminal cursor blink ---------- */
+@keyframes term-blink {
+  0%, 49%   { opacity: 1; }
+  50%, 100% { opacity: 0; }
 }
+.term-cursor {
+  display: inline-block;
+  width: 0.55ch;
+  background-color: currentColor;
+  animation: term-blink 1s steps(1, end) infinite;
+  vertical-align: baseline;
+  height: 1em;
+  margin-left: 2px;
+  transform: translateY(2px);
+}
+
+/* ---------- Anti-FOUC helper: hide content until fonts + theme resolved ---------- */
+html.theme-ready body { opacity: 1; }
+html:not(.theme-ready) body { opacity: 0; }

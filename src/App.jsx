@@ -1,5 +1,4 @@
 import React, { useState, useEffect, Suspense, lazy } from "react";
-import { motion, AnimatePresence } from "framer-motion";
 
 // Core components - load immediately
 import Navbar from "./components/Navbar";
@@ -10,147 +9,121 @@ import LoadingScreen from "./components/LoadingScreen";
 import ScrollToTop from "./components/ScrollToTop";
 import ScrollProgress from "./components/ScrollProgress";
 import SectionRail from "./components/SectionRail";
-import WaveSeparator from "./components/WaveSeparator";
 import LanguageToggle from "./components/LanguageToggle";
 
 // Lazy load other components for better performance
-const Timeline = lazy(() => import('./components/Timeline'));
-const Certifications = lazy(() => import('./components/Certifications'));
-const TechStack = lazy(() => import('./components/TechStack'));
-const Skills = lazy(() => import('./components/Skills'));
-const AboutMe = lazy(() => import('./components/AboutMe'));
-const Testimonials = lazy(() => import('./components/Testimonials'));
-const Contact = lazy(() => import('./components/Contact'));
-const Projects = lazy(() => import('./components/Projects'));
+const Timeline = lazy(() => import("./components/Timeline"));
+const Certifications = lazy(() => import("./components/Certifications"));
+const TechStack = lazy(() => import("./components/TechStack"));
+const Skills = lazy(() => import("./components/Skills"));
+const AboutMe = lazy(() => import("./components/AboutMe"));
+const Testimonials = lazy(() => import("./components/Testimonials"));
+const Contact = lazy(() => import("./components/Contact"));
+const Projects = lazy(() => import("./components/Projects"));
 
-// Section loading fallback
 function SectionLoader() {
   return (
-    <div className="flex items-center justify-center py-20">
-      <div className="animate-spin rounded-full h-10 w-10 border-b-2 border-blue-500"></div>
+    <div className="flex items-center justify-center py-20" role="status" aria-label="Loading section">
+      <span className="font-mono text-sm text-slate">…</span>
     </div>
   );
 }
 
+// Read the class the anti-FOUC script set on <html>.
+function readInitialTheme() {
+  if (typeof document === "undefined") return "dark";
+  return document.documentElement.classList.contains("dark") ? "dark" : "light";
+}
+
+function readInitialLanguage() {
+  if (typeof window === "undefined") return "en";
+  try {
+    const stored = localStorage.getItem("lang");
+    if (stored === "fr" || stored === "en") return stored;
+    return (navigator.language || "en").toLowerCase().startsWith("fr") ? "fr" : "en";
+  } catch (e) {
+    return "en";
+  }
+}
+
 export default function App() {
-  const [theme, setTheme] = useState("dark");
-  const [language, setLanguage] = useState("en");
+  const [theme, setTheme] = useState(readInitialTheme);
+  const [language, setLanguage] = useState(readInitialLanguage);
   const [isLoading, setIsLoading] = useState(true);
 
-  // Initial loading simulation for smooth entrance
+  // Short loading window; matches the LoadingScreen animation budget.
   useEffect(() => {
-    const timer = setTimeout(() => {
-      setIsLoading(false);
-    }, 1500);
+    const timer = setTimeout(() => setIsLoading(false), 500);
     return () => clearTimeout(timer);
   }, []);
 
-  // Theme management
   useEffect(() => {
-    document.documentElement.classList.toggle("dark", theme === "dark");
+    const root = document.documentElement;
+    root.classList.toggle("dark", theme === "dark");
+    try {
+      localStorage.setItem("theme", theme);
+    } catch (e) { /* ignore */ }
   }, [theme]);
 
-  // Preload critical fonts
   useEffect(() => {
-    const link = document.createElement("link");
-    link.rel = "preconnect";
-    link.href = "https://fonts.gstatic.com";
-    link.crossOrigin = "anonymous";
-    document.head.appendChild(link);
-  }, []);
+    try {
+      localStorage.setItem("lang", language);
+    } catch (e) { /* ignore */ }
+    document.documentElement.setAttribute("lang", language);
+  }, [language]);
 
   return (
     <ErrorBoundary>
-      <AnimatePresence mode="wait">
-        {isLoading ? (
-          <motion.div
-            key="loading"
-            initial={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.5 }}
-          >
-            <LoadingScreen />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.5 }}
-            className="bg-gradient-to-b from-gray-900 via-gray-800 to-gray-900 min-h-screen text-white font-sans"
-          >
-            {/* Reading progress bar */}
-            <ScrollProgress />
+      {isLoading ? (
+        <LoadingScreen />
+      ) : (
+        <div className="min-h-screen bg-paper text-ink dark:bg-ink dark:text-[color:var(--fg)] font-sans">
+          <ScrollProgress />
+          <SectionRail />
 
-            {/* Right-side section rail (desktop only) */}
-            <SectionRail />
+          <Navbar theme={theme} setTheme={setTheme} language={language} />
+          <LanguageToggle language={language} setLanguage={setLanguage} />
 
-            {/* Navigation */}
-            <Navbar theme={theme} setTheme={setTheme} language={language} />
-            <LanguageToggle language={language} setLanguage={setLanguage} />
+          <main id="main-content" role="main">
+            <Hero language={language} />
 
-            {/* Main Content */}
-            <main id="main-content" role="main">
-              {/* Hero Section */}
-              <Hero language={language} />
-              <WaveSeparator />
+            <Suspense fallback={<SectionLoader />}>
+              <AboutMe language={language} />
+            </Suspense>
 
-              {/* 01 · About — who I am */}
-              <Suspense fallback={<SectionLoader />}>
-                <AboutMe language={language} />
-              </Suspense>
-              <WaveSeparator flip />
+            <Suspense fallback={<SectionLoader />}>
+              <Skills language={language} />
+            </Suspense>
 
-              {/* 02 · Skills — what I can do */}
-              <Suspense fallback={<SectionLoader />}>
-                <Skills language={language} />
-              </Suspense>
-              <WaveSeparator />
+            <Suspense fallback={<SectionLoader />}>
+              <TechStack language={language} />
+            </Suspense>
 
-              {/* 03 · Tech Stack — tools I use */}
-              <Suspense fallback={<SectionLoader />}>
-                <TechStack language={language} />
-              </Suspense>
-              <WaveSeparator flip />
+            <Suspense fallback={<SectionLoader />}>
+              <Projects language={language} />
+            </Suspense>
 
-              {/* 04 · Projects — what I've built */}
-              <Suspense fallback={<SectionLoader />}>
-                <Projects language={language} />
-              </Suspense>
-              <WaveSeparator />
+            <Suspense fallback={<SectionLoader />}>
+              <Timeline language={language} />
+            </Suspense>
 
-              {/* 05 · Timeline — my journey */}
-              <Suspense fallback={<SectionLoader />}>
-                <Timeline language={language} />
-              </Suspense>
-              <WaveSeparator flip />
+            <Suspense fallback={<SectionLoader />}>
+              <Certifications language={language} />
+            </Suspense>
 
-              {/* 06 · Certifications — credentials */}
-              <Suspense fallback={<SectionLoader />}>
-                <Certifications language={language} />
-              </Suspense>
-              <WaveSeparator />
+            <Suspense fallback={<SectionLoader />}>
+              <Testimonials language={language} />
+            </Suspense>
 
-              {/* 07 · Testimonials — social proof */}
-              <Suspense fallback={<SectionLoader />}>
-                <Testimonials language={language} />
-              </Suspense>
-              <WaveSeparator flip />
+            <Suspense fallback={<SectionLoader />}>
+              <Contact language={language} />
+            </Suspense>
+          </main>
 
-              {/* 08 · Contact — let's talk */}
-              <Suspense fallback={<SectionLoader />}>
-                <Contact language={language} />
-              </Suspense>
-            </main>
-
-            {/* Footer */}
-            <Footer language={language} />
-
-            {/* Scroll to top button */}
-            <ScrollToTop />
-          </motion.div>
-        )}
-      </AnimatePresence>
+          <Footer language={language} />
+          <ScrollToTop />
+        </div>
+      )}
     </ErrorBoundary>
   );
 }
