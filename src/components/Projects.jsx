@@ -3,140 +3,72 @@ import React, { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import { FaGithub, FaExternalLinkAlt, FaStar, FaCode } from "react-icons/fa";
 import SectionHeader from "./SectionHeader";
+import translations from "../translations";
 
-const projects = [
-  {
-    title: "Food & Calorie Estimation",
-    description: "Deep learning application using ResNet18 to classify food items and estimate calorie content. Features include real-time image analysis, nutritional information display, and a user-friendly interface. Containerized with Docker for easy deployment.",
-    tech: ["Python", "PyTorch", "Docker", "Streamlit", "ResNet18"],
-    image: `${import.meta.env.BASE_URL}project-food.jpg`,
-    demo: "#",
-    code: "https://github.com/YassineChmirrou/Food-and-Calorie-Estimation-Deep-learning",
-    featured: true,
-    category: "Deep Learning"
+// Per-project static metadata (images + links). Copy stays in translations.js.
+// TODO Yassine: replace `demo` / `code` "#" with real URLs once repos are public.
+const projectMeta = {
+  agrimind: {
+    image: `${import.meta.env.BASE_URL}project-nlp.jpg`,
+    demo: "#", // TODO Yassine: private on-premise project — leave "#" if no public demo
+    code: "#"  // TODO Yassine: add repo URL if any part is public
   },
-  {
-    title: "Cheating Detection System",
-    description: "Real-time cheating detection system using pose estimation and machine learning. Implements XGBoost classifier with MLflow for experiment tracking. Monitors exam behavior through webcam analysis to detect suspicious activities.",
-    tech: ["Python", "OpenCV", "XGBoost", "MLflow", "MediaPipe"],
-    image: `${import.meta.env.BASE_URL}project-cheating.jpg`,
+  sahbi: {
+    image: `${import.meta.env.BASE_URL}project-voice.jpg`,
     demo: "#",
-    code: "https://github.com/YassineChmirrou/Cheating-Detection",
-    featured: true,
-    category: "Computer Vision"
+    code: "#"  // TODO Yassine: add SAHBI repo URL
   },
-  {
-    title: "Hotel Review NLP Analysis",
-    description: "Comprehensive NLP pipeline for analyzing hotel reviews. Uses BERT for sentiment classification and LDA for topic modeling. Includes web scraping with Selenium to collect reviews from multiple platforms.",
-    tech: ["BERT", "LDA", "Selenium", "Pandas", "NLTK"],
+  volta: {
+    image: `${import.meta.env.BASE_URL}project-portfolio.jpg`,
+    demo: "#", // TODO Yassine: add VOLTA landing / app store URL if public
+    code: "#"  // TODO Yassine: repo is client property — keep "#" if private
+  },
+  reviewsense: {
     image: `${import.meta.env.BASE_URL}project-nlp.jpg`,
     demo: "#",
-    code: "https://github.com/YassineChmirrou/Hotel-Review-NLP",
-    featured: true,
-    category: "NLP"
+    code: "#"  // TODO Yassine: add ReviewSense AI repo URL
   },
-  {
-    title: "AI Portfolio Website",
-    description: "Modern, responsive portfolio built with React and Tailwind CSS. Features smooth Framer Motion animations, dark mode support, lazy loading, and optimized performance. Deployed on GitHub Pages with CI/CD.",
-    tech: ["React", "Tailwind CSS", "Framer Motion", "Vite"],
-    image: `${import.meta.env.BASE_URL}project-portfolio.jpg`,
-    demo: "https://yassine1mac.github.io/portfolio-yassine/",
-    code: "https://github.com/yassine1mac/portfolio-yassine",
-    featured: true,
-    category: "Web Development"
-  },
-  {
-    title: "Stock Price Predictor",
-    description: "LSTM-based neural network for predicting stock prices with historical data analysis. Features interactive visualization dashboard using Plotly and real-time data streaming capabilities.",
-    tech: ["TensorFlow", "Keras", "Pandas", "Plotly", "yfinance"],
-    image: `${import.meta.env.BASE_URL}project-stock.jpg`,
+  cheating: {
+    image: `${import.meta.env.BASE_URL}project-cheating.jpg`,
     demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "Deep Learning"
+    code: "https://github.com/YassineChmirrou/Cheating-Detection"
   },
-  {
-    title: "Face Recognition Attendance",
-    description: "Automated attendance tracking system using deep face recognition. Processes real-time video streams to identify individuals and logs attendance to a MySQL database with Flask backend.",
-    tech: ["Python", "OpenCV", "FaceNet", "MySQL", "Flask"],
-    image: `${import.meta.env.BASE_URL}project-face.jpg`,
-    demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "Computer Vision"
-  },
-  {
-    title: "RAG Chatbot with LangChain",
-    description: "Intelligent chatbot using Retrieval-Augmented Generation for context-aware responses. Integrates vector databases (Pinecone) for efficient document retrieval and FastAPI for the backend.",
-    tech: ["LangChain", "OpenAI", "Pinecone", "FastAPI"],
+  "rag-chatbot": {
     image: `${import.meta.env.BASE_URL}project-chatbot.jpg`,
     demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "NLP"
-  },
-  {
-    title: "Credit Card Fraud Detection",
-    description: "Machine learning pipeline for detecting fraudulent transactions using ensemble methods. Handles imbalanced data with SMOTE and implements real-time anomaly detection with streaming data.",
-    tech: ["Scikit-learn", "XGBoost", "Pandas", "Imbalanced-learn"],
-    image: `${import.meta.env.BASE_URL}project-fraud.jpg`,
-    demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "Machine Learning"
-  },
-  {
-    title: "Medical Image Segmentation",
-    description: "U-Net architecture for medical image segmentation to assist in tumor detection. Achieves high accuracy in identifying regions of interest in MRI and CT scans.",
-    tech: ["PyTorch", "U-Net", "NumPy", "Matplotlib", "nibabel"],
-    image: `${import.meta.env.BASE_URL}project-medical.jpg`,
-    demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "Deep Learning"
-  },
-  {
-    title: "Twitter Sentiment Analysis",
-    description: "Real-time sentiment analysis of tweets using transformer models. Features geographic mapping of sentiment trends and interactive D3.js visualizations.",
-    tech: ["Transformers", "Tweepy", "D3.js", "MongoDB"],
-    image: `${import.meta.env.BASE_URL}project-twitter.jpg`,
-    demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "NLP"
-  },
-  {
-    title: "Movie Recommendation Engine",
-    description: "Hybrid recommendation system combining collaborative filtering with content-based approaches. Uses matrix factorization and deep learning for personalized recommendations.",
-    tech: ["PyTorch", "Surprise", "Redis", "FastAPI"],
-    image: `${import.meta.env.BASE_URL}project-recommend.jpg`,
-    demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "Machine Learning"
-  },
-  {
-    title: "YOLO Object Detection",
-    description: "YOLOv8-based real-time object detection for autonomous driving scenarios. Identifies vehicles, pedestrians, and traffic signs with high accuracy and low latency.",
-    tech: ["YOLOv8", "OpenCV", "TensorRT", "CUDA"],
-    image: `${import.meta.env.BASE_URL}project-yolo.jpg`,
-    demo: "#",
-    code: "https://github.com/YassineChmirrou",
-    featured: false,
-    category: "Computer Vision"
+    code: "#"  // TODO Yassine: add RAG chatbot repo URL
   }
-];
+};
 
-const categories = ["All", "Deep Learning", "Computer Vision", "NLP", "Machine Learning", "Web Development"];
+// Render `**bold**` markers as <strong> so descriptions keep their metric emphasis.
+function renderDescription(text) {
+  const parts = text.split(/(\*\*[^*]+\*\*)/g);
+  return parts.map((part, i) => {
+    if (part.startsWith("**") && part.endsWith("**")) {
+      return (
+        <strong key={i} className="font-semibold text-gray-900 dark:text-white">
+          {part.slice(2, -2)}
+        </strong>
+      );
+    }
+    return <React.Fragment key={i}>{part}</React.Fragment>;
+  });
+}
 
-export default function Projects() {
-  const [filter, setFilter] = useState("All");
+export default function Projects({ language = "en" }) {
+  const t = translations[language].projects;
+  const [filter, setFilter] = useState("all");
   const [showAll, setShowAll] = useState(false);
 
-  const filteredProjects = projects.filter(
-    project => filter === "All" || project.category === filter
-  );
+  const projects = t.items.map((item) => ({
+    ...item,
+    ...(projectMeta[item.key] || {})
+  }));
 
+  const categoryOrder = ["all", "ai", "fullstack", "mobile", "cv"];
+  const filteredProjects = projects.filter(
+    (project) => filter === "all" || project.category === filter
+  );
   const displayedProjects = showAll ? filteredProjects : filteredProjects.slice(0, 6);
 
   return (
@@ -149,24 +81,24 @@ export default function Projects() {
 
       <div className="max-w-7xl mx-auto relative z-10">
         <SectionHeader
-          eyebrow="04 · Projects"
-          title="Selected engineering work"
-          description="Production-grade AI, ML, and data systems — from deep learning pipelines to full-stack applications."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-2 mb-12 -mt-6">
-          {categories.map((category) => (
+          {categoryOrder.map((catKey) => (
             <button
-              key={category}
-              onClick={() => setFilter(category)}
+              key={catKey}
+              onClick={() => setFilter(catKey)}
               className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
-                filter === category
+                filter === catKey
                   ? "bg-gradient-to-r from-blue-600 to-purple-600 text-white shadow-lg"
                   : "bg-gray-200 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-300 dark:hover:bg-gray-600"
               }`}
             >
-              {category}
+              {t.categories[catKey]}
             </button>
           ))}
         </div>
@@ -175,7 +107,7 @@ export default function Projects() {
         <AnimatePresence mode="popLayout">
           {displayedProjects.map((project, index) => (
             <motion.div
-              key={project.title}
+              key={project.key}
               layout
               initial={{ opacity: 0, scale: 0.9 }}
               animate={{ opacity: 1, scale: 1 }}
@@ -187,7 +119,7 @@ export default function Projects() {
               {/* Featured badge */}
               {project.featured && (
                 <div className="absolute top-4 left-4 z-20 bg-gradient-to-r from-yellow-400 to-orange-500 text-white text-xs font-bold px-3 py-1 rounded-full flex items-center gap-1 shadow-lg">
-                  <FaStar className="text-xs" /> Featured
+                  <FaStar className="text-xs" /> {t.featuredBadge}
                 </div>
               )}
 
@@ -208,7 +140,7 @@ export default function Projects() {
 
                   {/* Category badge */}
                   <div className="absolute top-4 right-4 bg-white/90 dark:bg-gray-900/90 backdrop-blur-md px-3 py-1 rounded-full text-xs font-semibold text-gray-800 dark:text-white shadow-lg">
-                    {project.category}
+                    {project.categoryLabel}
                   </div>
                 </div>
 
@@ -218,8 +150,8 @@ export default function Projects() {
                     {project.title}
                   </h3>
 
-                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-3">
-                    {project.description}
+                  <p className="text-sm text-gray-600 dark:text-gray-300 leading-relaxed line-clamp-4">
+                    {renderDescription(project.description)}
                   </p>
 
                   {/* Tech stack pills */}
@@ -241,7 +173,7 @@ export default function Projects() {
 
                   {/* Action buttons */}
                   <div className="flex gap-3 pt-2">
-                    {project.demo !== "#" && (
+                    {project.demo && project.demo !== "#" && (
                       <motion.a
                         whileHover={{ scale: 1.05 }}
                         whileTap={{ scale: 0.95 }}
@@ -249,21 +181,21 @@ export default function Projects() {
                         target="_blank"
                         rel="noopener noreferrer"
                         className="flex-1 flex items-center justify-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white text-sm font-medium px-4 py-2.5 rounded-xl hover:shadow-lg transition-all"
-                        aria-label={`View ${project.title} demo`}
+                        aria-label={`${t.liveDemo} · ${project.title}`}
                       >
-                        <FaExternalLinkAlt size={12} aria-hidden="true" /> Live Demo
+                        <FaExternalLinkAlt size={12} aria-hidden="true" /> {t.liveDemo}
                       </motion.a>
                     )}
                     <motion.a
                       whileHover={{ scale: 1.05 }}
                       whileTap={{ scale: 0.95 }}
-                      href={project.code}
+                      href={project.code || "#"}
                       target="_blank"
                       rel="noopener noreferrer"
-                      className={`${project.demo !== "#" ? 'flex-1' : 'w-full'} flex items-center justify-center gap-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all`}
-                      aria-label={`View ${project.title} source code on GitHub`}
+                      className={`${project.demo && project.demo !== "#" ? 'flex-1' : 'w-full'} flex items-center justify-center gap-2 border-2 border-gray-300 dark:border-gray-600 text-gray-700 dark:text-gray-300 text-sm font-medium px-4 py-2.5 rounded-xl hover:bg-gray-50 dark:hover:bg-gray-700 transition-all`}
+                      aria-label={`${t.viewCode} · ${project.title}`}
                     >
-                      <FaGithub size={14} aria-hidden="true" /> View Code
+                      <FaGithub size={14} aria-hidden="true" /> {t.viewCode}
                     </motion.a>
                   </div>
                 </div>
@@ -285,7 +217,7 @@ export default function Projects() {
             className="inline-flex items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold px-8 py-3 rounded-full hover:shadow-xl transition-all focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
           >
             <FaCode aria-hidden="true" />
-            {showAll ? "Show Less" : `View All ${filteredProjects.length} Projects`}
+            {showAll ? t.showLess : t.showAll(filteredProjects.length)}
           </button>
         </motion.div>
       )}
