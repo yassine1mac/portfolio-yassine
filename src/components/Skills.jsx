@@ -2,38 +2,12 @@ import React from "react";
 import { motion } from "framer-motion";
 import CountUp from "react-countup";
 import SectionHeader from "./SectionHeader";
+import translations from "../translations";
 
-const skillCategories = [
-  {
-    category: "Machine Learning & AI",
-    skills: [
-      { name: "Deep Learning (PyTorch, TensorFlow)", level: 90 },
-      { name: "Computer Vision (OpenCV, YOLO)", level: 85 },
-      { name: "NLP & LLMs (BERT, GPT, LangChain)", level: 80 },
-      { name: "MLOps (MLflow, Docker, Airflow)", level: 75 }
-    ]
-  },
-  {
-    category: "Big Data & Engineering",
-    skills: [
-      { name: "Python (Pandas, NumPy, Scikit-learn)", level: 95 },
-      { name: "Apache Spark & Kafka", level: 70 },
-      { name: "SQL & NoSQL Databases", level: 85 },
-      { name: "Cloud Platforms (AWS, GCP)", level: 65 }
-    ]
-  },
-  {
-    category: "Web Development",
-    skills: [
-      { name: "React & Modern JavaScript", level: 88 },
-      { name: "FastAPI & Flask", level: 82 },
-      { name: "Tailwind CSS & UI/UX", level: 90 },
-      { name: "RESTful APIs & WebSockets", level: 80 }
-    ]
-  }
-];
+export default function Skills({ language = "en" }) {
+  const t = translations[language].skills;
+  const skillCategories = t.categories;
 
-export default function Skills() {
   return (
     <section className="w-full py-24 bg-gradient-to-b from-gray-50 to-white dark:from-gray-900 dark:to-gray-800 relative overflow-hidden" id="skills">
       {/* Grid decoration */}
@@ -41,9 +15,9 @@ export default function Skills() {
 
       <div className="max-w-6xl mx-auto px-6 relative z-10">
         <SectionHeader
-          eyebrow="02 · Skills"
-          title="Technical expertise"
-          description="Engineering-grade proficiency across the full AI/ML lifecycle — from data pipelines to model serving."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         <div className="space-y-8">
