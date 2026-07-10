@@ -15,6 +15,49 @@ const translations = {
         stack: "Tech stack"
       }
     },
+    heroDemo: {
+      title: "agrimind — text-to-sql",
+      resultsLabel: "results",
+      examples: [
+        {
+          nl: "Which parcels exceeded their irrigation quota this month?",
+          sql: [
+            "SELECT parcel_id, region,",
+            "       SUM(irrigation_m3) AS total_m3",
+            "FROM   irrigation_events",
+            "WHERE  month = '2026-06'",
+            "GROUP BY parcel_id, region",
+            "HAVING SUM(irrigation_m3) > quota_m3",
+            "ORDER BY total_m3 DESC;"
+          ],
+          result: "47 parcels over quota · 380 ms"
+        },
+        {
+          nl: "List critical moisture-sensor anomalies in sector 4.",
+          sql: [
+            "SELECT sensor_id, timestamp, humidity_pct",
+            "FROM   anomalies_moisture",
+            "WHERE  severity = 'critical'",
+            "  AND  sector = 4",
+            "ORDER BY timestamp DESC",
+            "LIMIT  20;"
+          ],
+          result: "12 critical anomalies · 220 ms"
+        },
+        {
+          nl: "Average yield per variety over the last 3 seasons.",
+          sql: [
+            "SELECT variety, AVG(yield_qha) AS avg_yield",
+            "FROM   harvests h",
+            "JOIN   parcels  p ON p.id = h.parcel_id",
+            "WHERE  h.season BETWEEN 2023 AND 2025",
+            "GROUP BY variety",
+            "ORDER BY avg_yield DESC;"
+          ],
+          result: "34 varieties analyzed · 410 ms"
+        }
+      ]
+    },
     about: {
       eyebrow: "01 · About",
       title: "Engineered for AI at scale",
@@ -287,6 +330,49 @@ const translations = {
         degree: "Diplôme d'ingénieur",
         stack: "Stack technique"
       }
+    },
+    heroDemo: {
+      title: "agrimind — text-to-sql",
+      resultsLabel: "résultats",
+      examples: [
+        {
+          nl: "Combien de parcelles ont dépassé leur quota d'irrigation ce mois-ci ?",
+          sql: [
+            "SELECT parcel_id, region,",
+            "       SUM(irrigation_m3) AS total_m3",
+            "FROM   irrigation_events",
+            "WHERE  mois = '2026-06'",
+            "GROUP BY parcel_id, region",
+            "HAVING SUM(irrigation_m3) > quota_m3",
+            "ORDER BY total_m3 DESC;"
+          ],
+          result: "47 parcelles hors quota · 380 ms"
+        },
+        {
+          nl: "Liste les anomalies critiques sur les capteurs d'humidité du secteur 4.",
+          sql: [
+            "SELECT sensor_id, timestamp, humidite_pct",
+            "FROM   anomalies_humidite",
+            "WHERE  severite = 'critique'",
+            "  AND  secteur = 4",
+            "ORDER BY timestamp DESC",
+            "LIMIT  20;"
+          ],
+          result: "12 anomalies critiques · 220 ms"
+        },
+        {
+          nl: "Rendement moyen par variété sur les 3 dernières saisons.",
+          sql: [
+            "SELECT variete, AVG(rendement_qha) AS rendement_moyen",
+            "FROM   recoltes r",
+            "JOIN   parcelles p ON p.id = r.parcelle_id",
+            "WHERE  r.saison BETWEEN 2023 AND 2025",
+            "GROUP BY variete",
+            "ORDER BY rendement_moyen DESC;"
+          ],
+          result: "34 variétés analysées · 410 ms"
+        }
+      ]
     },
     about: {
       eyebrow: "01 · À propos",
