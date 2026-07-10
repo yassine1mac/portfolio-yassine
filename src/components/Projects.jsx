@@ -201,9 +201,9 @@ function FeaturedCard({ project, t }) {
               style={{
                 width: 44,
                 height: 44,
-                backgroundColor: "var(--console)",
-                color: "var(--terminal)",
-                border: "1px solid var(--hairline-strong)"
+                backgroundColor: "var(--surface-alt)",
+                color: "var(--accent)",
+                border: "1px solid var(--accent)"
               }}
             >
               {monogram}
