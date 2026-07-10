@@ -1,4 +1,3 @@
-// src/components/SectionRail.jsx
 import React, { useEffect, useState } from "react";
 
 const sections = [
@@ -9,7 +8,7 @@ const sections = [
   { id: "timeline", label: "Journey" },
   { id: "certifications", label: "Credentials" },
   { id: "testimonials", label: "Reviews" },
-  { id: "contact", label: "Contact" },
+  { id: "contact", label: "Contact" }
 ];
 
 export default function SectionRail() {
@@ -34,7 +33,7 @@ export default function SectionRail() {
   return (
     <nav
       aria-label="Section navigation"
-      className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-40 flex-col gap-3"
+      className="hidden lg:flex fixed right-6 top-1/2 -translate-y-1/2 z-30 flex-col gap-3"
     >
       {sections.map((s) => {
         const isActive = active === s.id;
@@ -46,20 +45,22 @@ export default function SectionRail() {
             className="group relative flex items-center justify-end gap-3"
           >
             <span
-              className={`text-xs font-mono uppercase tracking-widest transition-all ${
-                isActive
-                  ? "opacity-100 text-blue-600 dark:text-blue-400"
-                  : "opacity-0 group-hover:opacity-100 text-gray-500 dark:text-gray-400"
-              }`}
+              className="font-mono text-[10px] uppercase tracking-widest transition-opacity"
+              style={{
+                opacity: isActive ? 1 : 0,
+                color: isActive ? "var(--accent)" : "var(--fg-muted)"
+              }}
             >
               {s.label}
             </span>
             <span
-              className={`block rounded-full transition-all ${
-                isActive
-                  ? "w-3 h-3 bg-gradient-to-br from-blue-500 to-purple-500 shadow-[0_0_12px_rgba(59,130,246,0.6)]"
-                  : "w-2 h-2 bg-gray-400 dark:bg-gray-600 group-hover:bg-blue-500"
-              }`}
+              aria-hidden
+              className="block transition-all"
+              style={{
+                width: isActive ? "12px" : "6px",
+                height: "6px",
+                backgroundColor: isActive ? "var(--accent)" : "var(--hairline-strong)"
+              }}
             />
           </a>
         );

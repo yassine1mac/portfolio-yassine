@@ -1,345 +1,243 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
-import { FaEnvelope, FaMapMarkerAlt, FaPaperPlane, FaGithub, FaLinkedin, FaWhatsapp, FaCheckCircle, FaExclamationCircle } from "react-icons/fa";
-import SectionHeader from "./SectionHeader";
 import translations from "../translations";
+import useReveal from "../hooks/useReveal";
 
+// Section brand: navy background always (light + dark). Moment of contrast
+// at the end of the reading flow.
 export default function Contact({ language = "en" }) {
   const t = translations[language].contact;
-  const [formData, setFormData] = useState({
-    name: "",
-    email: "",
-    subject: "",
-    message: ""
-  });
-
+  const ref = useReveal();
+  const [formData, setFormData] = useState({ name: "", email: "", subject: "", message: "" });
   const [status, setStatus] = useState("");
   const [errors, setErrors] = useState({});
 
   const validateForm = () => {
-    const newErrors = {};
-    if (!formData.name.trim()) newErrors.name = t.form.errors.nameRequired;
-    if (!formData.email.trim()) {
-      newErrors.email = t.form.errors.emailRequired;
-    } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) {
-      newErrors.email = t.form.errors.emailInvalid;
-    }
-    if (!formData.subject.trim()) newErrors.subject = t.form.errors.subjectRequired;
-    if (!formData.message.trim()) {
-      newErrors.message = t.form.errors.messageRequired;
-    } else if (formData.message.trim().length < 10) {
-      newErrors.message = t.form.errors.messageShort;
-    }
-    setErrors(newErrors);
-    return Object.keys(newErrors).length === 0;
+    const e = {};
+    if (!formData.name.trim()) e.name = t.form.errors.nameRequired;
+    if (!formData.email.trim()) e.email = t.form.errors.emailRequired;
+    else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(formData.email)) e.email = t.form.errors.emailInvalid;
+    if (!formData.subject.trim()) e.subject = t.form.errors.subjectRequired;
+    if (!formData.message.trim()) e.message = t.form.errors.messageRequired;
+    else if (formData.message.trim().length < 10) e.message = t.form.errors.messageShort;
+    setErrors(e);
+    return Object.keys(e).length === 0;
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({ ...prev, [name]: value }));
-    if (errors[name]) {
-      setErrors(prev => ({ ...prev, [name]: "" }));
-    }
+  const handleChange = (evt) => {
+    const { name, value } = evt.target;
+    setFormData((p) => ({ ...p, [name]: value }));
+    if (errors[name]) setErrors((p) => ({ ...p, [name]: "" }));
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
+  const handleSubmit = async (evt) => {
+    evt.preventDefault();
     if (!validateForm()) return;
-
     setStatus("sending");
-
     try {
       const response = await fetch("https://formspree.io/f/xpwzgvvk", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          "Accept": "application/json"
-        },
-        body: JSON.stringify({
-          name: formData.name,
-          email: formData.email,
-          subject: formData.subject,
-          message: formData.message,
-          _subject: `Portfolio Contact: ${formData.subject}`
-        })
+        headers: { "Content-Type": "application/json", Accept: "application/json" },
+        body: JSON.stringify({ ...formData, _subject: `Portfolio Contact: ${formData.subject}` })
       });
-
-      if (response.ok) {
-        setStatus("success");
-        setFormData({ name: "", email: "", subject: "", message: "" });
-        setTimeout(() => setStatus(""), 5000);
-      } else {
-        throw new Error("Form submission failed");
-      }
-    } catch (error) {
+      if (!response.ok) throw new Error();
+      setStatus("success");
+      setFormData({ name: "", email: "", subject: "", message: "" });
+      setTimeout(() => setStatus(""), 5000);
+    } catch (e) {
       setStatus("error");
       setTimeout(() => setStatus(""), 5000);
     }
   };
 
-  const contactInfo = [
-    {
-      icon: <FaEnvelope className="text-2xl" />,
-      title: t.email,
-      value: "yassinechmirrou1@gmail.com",
-      link: "mailto:yassinechmirrou1@gmail.com"
-    },
-    {
-      icon: <FaWhatsapp className="text-2xl" />,
-      title: t.whatsapp,
-      value: "+212 620 305 398",
-      link: "https://wa.me/212620305398"
-    },
-    {
-      icon: <FaMapMarkerAlt className="text-2xl" />,
-      title: t.location,
-      value: t.locationValue,
-      link: null
-    }
-  ];
-
-  const socialLinks = [
-    { icon: <FaGithub />, link: "https://github.com/YassineChmirrou", label: "GitHub" },
-    { icon: <FaLinkedin />, link: "https://linkedin.com/in/yassinechmirrou", label: "LinkedIn" },
-    { icon: <FaWhatsapp />, link: "https://wa.me/212620305398", label: "WhatsApp" }
-  ];
+  const fieldClass =
+    "w-full px-4 py-3 rounded-chip font-sans text-sm text-white placeholder-white/40 focus:outline-none";
+  const fieldStyle = {
+    backgroundColor: "rgba(255,255,255,0.05)",
+    border: "1px solid rgba(255,255,255,0.12)"
+  };
+  const fieldErrorStyle = { ...fieldStyle, borderColor: "#F87171" };
 
   return (
-    <section className="relative w-full py-24 bg-gradient-to-b from-white to-gray-50 dark:from-gray-800 dark:to-gray-900 overflow-hidden" id="contact">
-      {/* Decoration */}
-      <div className="absolute top-20 -right-20 w-96 h-96 bg-blue-400/5 rounded-full blur-3xl pointer-events-none"></div>
-      <div className="absolute bottom-20 -left-20 w-96 h-96 bg-purple-400/5 rounded-full blur-3xl pointer-events-none"></div>
+    <section
+      id="contact"
+      className="relative w-full px-6 py-24 md:py-32 text-white"
+      style={{ backgroundColor: "var(--navy)" }}
+    >
+      <div ref={ref} className="reveal max-w-6xl mx-auto">
+        <div className="eyebrow mb-6" style={{ color: "var(--accent-bright)" }}>
+          [ {t.eyebrow} ]
+        </div>
+        <h2 className="h-hero max-w-4xl" style={{ color: "#FFFFFF" }}>
+          {t.title}
+        </h2>
+        <p className="mt-6 max-w-2xl text-base md:text-lg" style={{ color: "rgba(255,255,255,0.7)" }}>
+          {t.description}
+        </p>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
-        <SectionHeader
-          eyebrow={t.eyebrow}
-          title={t.title}
-          description={t.description}
-        />
-
-        <div className="grid lg:grid-cols-2 gap-12">
-          {/* Contact Info */}
-          <motion.div
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-            className="space-y-8"
-          >
-            <div className="bg-gradient-to-br from-blue-500 via-purple-500 to-pink-500 p-8 rounded-2xl text-white">
-              <h3 className="text-2xl font-bold mb-6">{t.infoTitle}</h3>
-              <p className="mb-8 text-white/80">
-                {t.infoIntro}
-              </p>
-
-              <div className="space-y-6">
-                {contactInfo.map((info, index) => (
-                  <motion.div
-                    key={index}
-                    whileHover={{ x: 10 }}
-                    className="flex items-center gap-4"
-                  >
-                    <div className="bg-white/20 p-3 rounded-lg backdrop-blur-sm">
-                      {info.icon}
-                    </div>
-                    <div>
-                      <p className="text-sm text-white/70">{info.title}</p>
-                      {info.link ? (
-                        <a
-                          href={info.link}
-                          className="font-semibold hover:underline focus:outline-none focus:ring-2 focus:ring-white/50 rounded"
-                          aria-label={`${info.title}: ${info.value}`}
-                        >
-                          {info.value}
-                        </a>
-                      ) : (
-                        <p className="font-semibold">{info.value}</p>
-                      )}
-                    </div>
-                  </motion.div>
-                ))}
+        <div className="mt-14 grid gap-12 lg:grid-cols-[1fr_1.2fr]">
+          {/* Left: contact channels */}
+          <div className="space-y-8">
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>
+                {t.email}
               </div>
+              <a
+                href="mailto:yassinechmirrou1@gmail.com"
+                className="font-display text-xl md:text-2xl hover:opacity-80 transition-opacity"
+                style={{ color: "#FFFFFF" }}
+              >
+                yassinechmirrou1@gmail.com
+              </a>
+            </div>
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>
+                {t.whatsapp}
+              </div>
+              <a
+                href="https://wa.me/212620305398"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="font-display text-xl md:text-2xl hover:opacity-80 transition-opacity"
+                style={{ color: "#FFFFFF" }}
+              >
+                +212 620 305 398
+              </a>
+            </div>
+            <div>
+              <div className="font-mono text-[11px] uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.5)" }}>
+                {t.location}
+              </div>
+              <p className="font-display text-xl md:text-2xl" style={{ color: "#FFFFFF" }}>
+                {t.locationValue}
+              </p>
+            </div>
 
-              <div className="mt-12">
-                <p className="text-sm text-white/70 mb-4">{t.followMe}</p>
-                <div className="flex gap-4">
-                  {socialLinks.map((social, index) => (
-                    <motion.a
-                      key={index}
-                      href={social.link}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      whileHover={{ scale: 1.2, rotate: 5 }}
-                      whileTap={{ scale: 0.9 }}
-                      className="bg-white/20 p-3 rounded-lg backdrop-blur-sm text-2xl hover:bg-white/30 transition-colors focus:outline-none focus:ring-2 focus:ring-white/50"
-                      aria-label={social.label}
-                    >
-                      {social.icon}
-                    </motion.a>
-                  ))}
-                </div>
+            <div className="pt-6 flex flex-wrap gap-3">
+              <a
+                href="https://github.com/YassineChmirrou"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-chip border font-mono text-xs uppercase tracking-widest transition-colors"
+                style={{ borderColor: "rgba(255,255,255,0.2)", color: "#FFFFFF" }}
+              >
+                GitHub ↗
+              </a>
+              <a
+                href="https://linkedin.com/in/yassinechmirrou"
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-chip border font-mono text-xs uppercase tracking-widest transition-colors"
+                style={{ borderColor: "rgba(255,255,255,0.2)", color: "#FFFFFF" }}
+              >
+                LinkedIn ↗
+              </a>
+              <a
+                href={`${import.meta.env.BASE_URL}cv.pdf`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="px-5 py-2.5 rounded-chip font-mono text-xs uppercase tracking-widest"
+                style={{ backgroundColor: "var(--accent)", color: "#FFFFFF" }}
+              >
+                {language === "fr" ? "CV ↓" : "CV ↓"}
+              </a>
+            </div>
+          </div>
+
+          {/* Right: form */}
+          <form onSubmit={handleSubmit} className="space-y-4" noValidate>
+            <div className="grid gap-4 sm:grid-cols-2">
+              <div>
+                <label htmlFor="name" className="block font-mono text-[11px] uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
+                  {t.form.name}
+                </label>
+                <input
+                  id="name"
+                  name="name"
+                  type="text"
+                  value={formData.name}
+                  onChange={handleChange}
+                  placeholder={t.form.namePlaceholder}
+                  className={fieldClass}
+                  style={errors.name ? fieldErrorStyle : fieldStyle}
+                  aria-invalid={!!errors.name}
+                />
+                {errors.name && <p className="mt-1 font-mono text-[11px]" style={{ color: "#FCA5A5" }}>{errors.name}</p>}
+              </div>
+              <div>
+                <label htmlFor="email" className="block font-mono text-[11px] uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
+                  {t.form.email}
+                </label>
+                <input
+                  id="email"
+                  name="email"
+                  type="email"
+                  value={formData.email}
+                  onChange={handleChange}
+                  placeholder={t.form.emailPlaceholder}
+                  className={fieldClass}
+                  style={errors.email ? fieldErrorStyle : fieldStyle}
+                  aria-invalid={!!errors.email}
+                />
+                {errors.email && <p className="mt-1 font-mono text-[11px]" style={{ color: "#FCA5A5" }}>{errors.email}</p>}
               </div>
             </div>
 
-            <motion.div
-              initial={{ opacity: 0, y: 20 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ delay: 0.4, duration: 0.8 }}
-              className="bg-gray-100 dark:bg-gray-800 p-6 rounded-2xl"
+            <div>
+              <label htmlFor="subject" className="block font-mono text-[11px] uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
+                {t.form.subject}
+              </label>
+              <input
+                id="subject"
+                name="subject"
+                type="text"
+                value={formData.subject}
+                onChange={handleChange}
+                placeholder={t.form.subjectPlaceholder}
+                className={fieldClass}
+                style={errors.subject ? fieldErrorStyle : fieldStyle}
+                aria-invalid={!!errors.subject}
+              />
+              {errors.subject && <p className="mt-1 font-mono text-[11px]" style={{ color: "#FCA5A5" }}>{errors.subject}</p>}
+            </div>
+
+            <div>
+              <label htmlFor="message" className="block font-mono text-[11px] uppercase tracking-widest mb-2" style={{ color: "rgba(255,255,255,0.6)" }}>
+                {t.form.message}
+              </label>
+              <textarea
+                id="message"
+                name="message"
+                rows="5"
+                value={formData.message}
+                onChange={handleChange}
+                placeholder={t.form.messagePlaceholder}
+                className={`${fieldClass} resize-none`}
+                style={errors.message ? fieldErrorStyle : fieldStyle}
+                aria-invalid={!!errors.message}
+              />
+              {errors.message && <p className="mt-1 font-mono text-[11px]" style={{ color: "#FCA5A5" }}>{errors.message}</p>}
+            </div>
+
+            <button
+              type="submit"
+              disabled={status === "sending"}
+              className="w-full sm:w-auto px-6 py-3 rounded-chip font-medium text-sm transition-colors disabled:opacity-50"
+              style={{ backgroundColor: "var(--accent)", color: "#FFFFFF" }}
             >
-              <h4 className="font-bold text-lg mb-2 text-gray-900 dark:text-white">{t.quickResponseTitle}</h4>
-              <p className="text-sm text-gray-600 dark:text-gray-400">
-                {t.quickResponseBody}
+              {status === "sending" ? t.form.sending : status === "success" ? t.form.sent : t.form.send}
+            </button>
+
+            {status === "success" && (
+              <p className="font-mono text-xs uppercase tracking-widest" style={{ color: "var(--terminal)" }}>
+                → {t.form.success}
               </p>
-            </motion.div>
-          </motion.div>
-
-          {/* Contact Form */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
-          >
-            <form onSubmit={handleSubmit} className="space-y-6" noValidate>
-              <div>
-                <label htmlFor="name" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  {t.form.name} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="name"
-                  name="name"
-                  value={formData.name}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.name ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none`}
-                  placeholder={t.form.namePlaceholder}
-                  aria-describedby={errors.name ? "name-error" : undefined}
-                  aria-invalid={errors.name ? "true" : "false"}
-                />
-                {errors.name && (
-                  <p id="name-error" className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                    <FaExclamationCircle /> {errors.name}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="email" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  {t.form.email} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  id="email"
-                  name="email"
-                  value={formData.email}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.email ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none`}
-                  placeholder={t.form.emailPlaceholder}
-                  aria-describedby={errors.email ? "email-error" : undefined}
-                  aria-invalid={errors.email ? "true" : "false"}
-                />
-                {errors.email && (
-                  <p id="email-error" className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                    <FaExclamationCircle /> {errors.email}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="subject" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  {t.form.subject} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="subject"
-                  name="subject"
-                  value={formData.subject}
-                  onChange={handleChange}
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.subject ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none`}
-                  placeholder={t.form.subjectPlaceholder}
-                  aria-describedby={errors.subject ? "subject-error" : undefined}
-                  aria-invalid={errors.subject ? "true" : "false"}
-                />
-                {errors.subject && (
-                  <p id="subject-error" className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                    <FaExclamationCircle /> {errors.subject}
-                  </p>
-                )}
-              </div>
-
-              <div>
-                <label htmlFor="message" className="block text-sm font-semibold mb-2 text-gray-900 dark:text-white">
-                  {t.form.message} <span className="text-red-500">*</span>
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  rows="6"
-                  className={`w-full px-4 py-3 rounded-lg border ${errors.message ? 'border-red-500' : 'border-gray-300 dark:border-gray-700'} bg-white dark:bg-gray-800 text-gray-900 dark:text-white focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all outline-none resize-none`}
-                  placeholder={t.form.messagePlaceholder}
-                  aria-describedby={errors.message ? "message-error" : undefined}
-                  aria-invalid={errors.message ? "true" : "false"}
-                />
-                {errors.message && (
-                  <p id="message-error" className="mt-1 text-sm text-red-500 flex items-center gap-1">
-                    <FaExclamationCircle /> {errors.message}
-                  </p>
-                )}
-              </div>
-
-              <motion.button
-                type="submit"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
-                disabled={status === "sending"}
-                className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white font-semibold py-4 px-6 rounded-lg flex items-center justify-center gap-2 hover:from-blue-700 hover:to-purple-700 transition-all shadow-lg hover:shadow-xl disabled:opacity-50 disabled:cursor-not-allowed focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2"
-                aria-busy={status === "sending"}
-              >
-                {status === "sending" ? (
-                  <>
-                    <div className="animate-spin rounded-full h-5 w-5 border-b-2 border-white" aria-hidden="true"></div>
-                    {t.form.sending}
-                  </>
-                ) : status === "success" ? (
-                  <>
-                    <FaCheckCircle aria-hidden="true" /> {t.form.sent}
-                  </>
-                ) : (
-                  <>
-                    <FaPaperPlane aria-hidden="true" /> {t.form.send}
-                  </>
-                )}
-              </motion.button>
-
-              {status === "success" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-green-100 dark:bg-green-900/30 rounded-lg"
-                  role="alert"
-                >
-                  <p className="text-center text-green-700 dark:text-green-400 font-semibold flex items-center justify-center gap-2">
-                    <FaCheckCircle /> {t.form.success}
-                  </p>
-                </motion.div>
-              )}
-
-              {status === "error" && (
-                <motion.div
-                  initial={{ opacity: 0, y: -10 }}
-                  animate={{ opacity: 1, y: 0 }}
-                  className="p-4 bg-red-100 dark:bg-red-900/30 rounded-lg"
-                  role="alert"
-                >
-                  <p className="text-center text-red-700 dark:text-red-400 font-semibold flex items-center justify-center gap-2">
-                    <FaExclamationCircle /> {t.form.error}
-                  </p>
-                </motion.div>
-              )}
-            </form>
-          </motion.div>
+            )}
+            {status === "error" && (
+              <p className="font-mono text-xs uppercase tracking-widest" style={{ color: "#FCA5A5" }}>
+                → {t.form.error}
+              </p>
+            )}
+          </form>
         </div>
       </div>
     </section>

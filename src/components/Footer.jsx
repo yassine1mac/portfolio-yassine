@@ -1,156 +1,53 @@
-// src/components/Footer.jsx
 import React from "react";
-import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaEnvelope,
-  FaArrowUp,
-  FaFilePdf,
-  FaWhatsapp,
-  FaHeart,
-} from "react-icons/fa";
-import translations from "../translations";
 
-const socialLinks = [
-  {
-    icon: <FaGithub />,
-    link: "https://github.com/yassine1mac",
-    label: "GitHub",
-  },
-  {
-    icon: <FaLinkedin />,
-    link: "https://linkedin.com/in/yassinechmirrou",
-    label: "LinkedIn",
-  },
-  {
-    icon: <FaWhatsapp />,
-    link: "https://wa.me/212620305398",
-    label: "WhatsApp",
-  },
-  {
-    icon: <FaEnvelope />,
-    link: "mailto:yassinechmirrou1@gmail.com",
-    label: "Email",
-  },
-];
-
+// One-line mono footer per the design brief.
 export default function Footer({ language = "en" }) {
-  const t = translations[language].footer;
   const year = new Date().getFullYear();
-
-  const navLinks = [
-    { name: t.nav.about, href: "#about" },
-    { name: t.nav.projects, href: "#projects" },
-    { name: t.nav.skills, href: "#skills" },
-    { name: t.nav.contact, href: "#contact" },
-  ];
-
-  const scrollToTop = () => {
-    window.scrollTo({
-      top: 0,
-      behavior: "smooth",
-    });
-  };
+  const suffix = language === "fr"
+    ? "conçu avec React · déployé sur GitHub Pages"
+    : "built with React · deployed on GitHub Pages";
 
   return (
-    <footer className="relative bg-gradient-to-b from-gray-900 via-gray-950 to-black text-gray-300 pt-20 pb-10 overflow-hidden">
-      {/* Wave separator */}
-      <div className="absolute top-0 left-0 right-0 -translate-y-full">
-        <svg
-          viewBox="0 0 1440 120"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-          className="w-full"
-        >
-          <path
-            d="M0 120L48 108C96 96 192 72 288 66C384 60 480 72 576 78C672 84 768 84 864 78C960 72 1056 60 1152 60C1248 60 1344 72 1392 78L1440 84V120H0Z"
-            fill="currentColor"
-            className="text-gray-900"
-          />
-        </svg>
-      </div>
-
-      <div className="max-w-7xl mx-auto px-6">
-        {/* Top Section */}
-        <div className="flex flex-col md:flex-row justify-between items-center gap-10 border-b border-gray-800 pb-8">
-          {/* Left */}
-          <div className="text-center md:text-left">
-            <h2 className="text-2xl font-bold text-white">
-              Yassine Chmirrou
-            </h2>
-
-            <p className="text-gray-400 mt-2 max-w-md">
-              {t.tagline}
-            </p>
-
-            {/* Navigation */}
-            <div className="flex flex-wrap justify-center md:justify-start gap-4 mt-4">
-              {navLinks.map((item, index) => (
-                <a
-                  key={index}
-                  href={item.href}
-                  className="text-sm hover:text-blue-500 transition duration-300"
-                >
-                  {item.name}
-                </a>
-              ))}
-            </div>
-          </div>
-
-          {/* Right */}
-          <div className="flex items-center gap-5 text-2xl">
-            {socialLinks.map((social, index) => (
-              <a
-                key={index}
-                href={social.link}
-                target="_blank"
-                rel="noopener noreferrer"
-                aria-label={social.label}
-                className="hover:text-blue-500 transition duration-300 hover:scale-110"
-              >
-                {social.icon}
-              </a>
-            ))}
-
-            {/* CV */}
-            <a
-              href={`${import.meta.env.BASE_URL}cv.pdf`}
-              target="_blank"
-              rel="noopener noreferrer"
-              aria-label="CV"
-              className="hover:text-red-500 transition duration-300 hover:scale-110"
-            >
-              <FaFilePdf />
-            </a>
-
-            {/* Back To Top */}
-            <button
-              onClick={scrollToTop}
-              aria-label="Back to top"
-              className="hover:text-green-400 transition duration-300 hover:scale-110"
-            >
-              <FaArrowUp />
-            </button>
-          </div>
+    <footer
+      className="w-full px-6 py-8 border-t"
+      style={{
+        borderColor: "var(--hairline)",
+        backgroundColor: "var(--bg)"
+      }}
+    >
+      <div className="max-w-6xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-3">
+        <p className="font-mono text-xs uppercase tracking-widest" style={{ color: "var(--fg-muted)" }}>
+          © {year} Yassine Chmirrou — {suffix}
+        </p>
+        <div className="flex items-center gap-4 font-mono text-xs uppercase tracking-widest">
+          <a
+            href="https://github.com/YassineChmirrou"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: "var(--fg-muted)" }}
+          >
+            GitHub
+          </a>
+          <a
+            href="https://linkedin.com/in/yassinechmirrou"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: "var(--fg-muted)" }}
+          >
+            LinkedIn
+          </a>
+          <a
+            href={`${import.meta.env.BASE_URL}cv.pdf`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="hover:opacity-70 transition-opacity"
+            style={{ color: "var(--fg-muted)" }}
+          >
+            CV
+          </a>
         </div>
-
-        {/* Bottom */}
-        <motion.div
-          initial={{ opacity: 0 }}
-          whileInView={{ opacity: 1 }}
-          transition={{ duration: 0.8 }}
-          className="mt-8 text-center space-y-3"
-        >
-          <p className="text-sm text-gray-500 flex items-center justify-center gap-2">
-            © {year} Yassine Chmirrou
-            <FaHeart className="text-red-500" />
-          </p>
-
-          <p className="text-xs italic text-gray-600">
-            {t.quote}
-          </p>
-        </motion.div>
       </div>
     </footer>
   );
