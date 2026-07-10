@@ -1,19 +1,21 @@
-// src/components/LanguageToggle.jsx
 import React from "react";
-import { motion } from "framer-motion";
 
 export default function LanguageToggle({ language, setLanguage }) {
-  const toggleLanguage = () => {
-    setLanguage((prev) => (prev === "en" ? "fr" : "en"));
-  };
+  const toggle = () => setLanguage((prev) => (prev === "en" ? "fr" : "en"));
+  const label = language === "en" ? "FR" : "EN";
 
   return (
-    <motion.button
-      onClick={toggleLanguage}
-      whileTap={{ scale: 0.95 }}
-      className="fixed bottom-6 right-6 z-50 bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded-full shadow-lg text-sm font-medium"
+    <button
+      onClick={toggle}
+      className="fixed bottom-6 left-6 z-40 h-11 px-4 font-mono text-xs tracking-widest uppercase rounded-chip border transition-colors"
+      style={{
+        backgroundColor: "var(--surface)",
+        borderColor: "var(--hairline-strong)",
+        color: "var(--fg)"
+      }}
+      aria-label={`Switch language to ${label}`}
     >
-      {language === "en" ? "Français" : "English"}
-    </motion.button>
+      {label}
+    </button>
   );
 }
