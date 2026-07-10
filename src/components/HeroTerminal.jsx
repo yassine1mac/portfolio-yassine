@@ -62,11 +62,10 @@ export default function HeroTerminal({ demo }) {
         </span>
       </div>
 
-      {/* Body */}
+      {/* Body — decorative animation; assistive tech should not narrate it */}
       <div
-        className="px-4 sm:px-6 py-5 sm:py-6 min-h-[280px] sm:min-h-[320px]"
-        aria-live="polite"
-        aria-atomic="false"
+        className="px-4 sm:px-6 py-5 sm:py-6 min-h-[260px] sm:min-h-[320px]"
+        aria-hidden="true"
       >
         {/* NL prompt line */}
         <div className="flex items-start gap-2">
@@ -77,8 +76,11 @@ export default function HeroTerminal({ demo }) {
           </span>
         </div>
 
-        {/* SQL block */}
-        <div className="mt-4 pl-4 border-l" style={{ borderColor: "rgba(255,255,255,0.08)" }}>
+        {/* SQL block — horizontally scrollable on narrow screens to preserve SQL formatting */}
+        <div
+          className="mt-4 pl-4 border-l overflow-x-auto"
+          style={{ borderColor: "rgba(255,255,255,0.08)" }}
+        >
           {state.typedSqlLines.length === 0 && state.phase !== "typing-nl" && (
             <div className="opacity-30" style={{ color: "var(--terminal)" }}>—</div>
           )}
