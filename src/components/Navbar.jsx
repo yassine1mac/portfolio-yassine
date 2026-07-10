@@ -1,19 +1,21 @@
 import React, { useState, useEffect } from "react";
 import { FaMoon, FaSun, FaBars, FaTimes } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import translations from "../translations";
 
-export default function Navbar({ theme, setTheme }) {
+export default function Navbar({ theme, setTheme, language = "en" }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
   const [activeSection, setActiveSection] = useState("");
 
   const toggleTheme = () => setTheme(theme === "dark" ? "light" : "dark");
+  const t = translations[language].navbar;
 
   const navLinks = [
-    { name: "About", href: "#about", id: "about" },
-    { name: "Projects", href: "#projects", id: "projects" },
-    { name: "Skills", href: "#skills", id: "skills" },
-    { name: "Contact", href: "#contact", id: "contact" },
+    { name: t.about, href: "#about", id: "about" },
+    { name: t.projects, href: "#projects", id: "projects" },
+    { name: t.skills, href: "#skills", id: "skills" },
+    { name: t.contact, href: "#contact", id: "contact" },
   ];
 
   // Track active section as user scrolls

@@ -9,15 +9,8 @@ import {
   FaFilePdf,
   FaWhatsapp,
   FaHeart,
-  FaReact,
 } from "react-icons/fa";
-
-const navLinks = [
-  { name: "About", href: "#about" },
-  { name: "Projects", href: "#projects" },
-  { name: "Skills", href: "#skills" },
-  { name: "Contact", href: "#contact" },
-];
+import translations from "../translations";
 
 const socialLinks = [
   {
@@ -42,8 +35,16 @@ const socialLinks = [
   },
 ];
 
-export default function Footer() {
+export default function Footer({ language = "en" }) {
+  const t = translations[language].footer;
   const year = new Date().getFullYear();
+
+  const navLinks = [
+    { name: t.nav.about, href: "#about" },
+    { name: t.nav.projects, href: "#projects" },
+    { name: t.nav.skills, href: "#skills" },
+    { name: t.nav.contact, href: "#contact" },
+  ];
 
   const scrollToTop = () => {
     window.scrollTo({
@@ -80,8 +81,7 @@ export default function Footer() {
             </h2>
 
             <p className="text-gray-400 mt-2 max-w-md">
-              Big Data & AI Engineer — building intelligent systems, scalable
-              data pipelines, and production-ready AI solutions.
+              {t.tagline}
             </p>
 
             {/* Navigation */}
@@ -115,7 +115,7 @@ export default function Footer() {
 
             {/* CV */}
             <a
-              href="/cv.pdf"
+              href={`${import.meta.env.BASE_URL}cv.pdf`}
               target="_blank"
               rel="noopener noreferrer"
               aria-label="CV"
@@ -148,7 +148,7 @@ export default function Footer() {
           </p>
 
           <p className="text-xs italic text-gray-600">
-            "The best way to predict the future is to invent it." — Alan Kay
+            {t.quote}
           </p>
         </motion.div>
       </div>
