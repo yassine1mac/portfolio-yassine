@@ -3,31 +3,14 @@ import React from "react";
 import { motion } from "framer-motion";
 import { FaRocket, FaBrain, FaCode, FaChartLine } from "react-icons/fa";
 import SectionHeader from "./SectionHeader";
+import translations from "../translations";
 
-const highlights = [
-  {
-    icon: <FaBrain />,
-    title: "AI & Machine Learning",
-    description: "Deep expertise in neural networks, computer vision, and NLP"
-  },
-  {
-    icon: <FaChartLine />,
-    title: "Big Data Engineering",
-    description: "Scalable data pipelines with Spark, Kafka, and cloud platforms"
-  },
-  {
-    icon: <FaCode />,
-    title: "Full-Stack Development",
-    description: "Production-ready applications with React, Python, and modern frameworks"
-  },
-  {
-    icon: <FaRocket />,
-    title: "Innovation Focus",
-    description: "Transforming research into real-world solutions"
-  }
-];
+const highlightIcons = [<FaBrain />, <FaChartLine />, <FaCode />, <FaRocket />];
 
-export default function AboutMe() {
+export default function AboutMe({ language = "en" }) {
+  const t = translations[language].about;
+  const highlights = t.highlights.map((h, i) => ({ ...h, icon: highlightIcons[i] }));
+
   return (
     <section id="about" className="relative py-24 px-6 bg-gradient-to-b from-white via-gray-50 to-white dark:from-gray-900 dark:via-gray-800 dark:to-gray-900 text-gray-800 dark:text-gray-100 overflow-hidden">
       {/* Background decoration */}
@@ -38,9 +21,9 @@ export default function AboutMe() {
 
       <div className="relative z-10 max-w-6xl mx-auto">
         <SectionHeader
-          eyebrow="01 · About"
-          title="Engineered for AI at scale"
-          description="Big Data & AI Engineer · Data Scientist · Full-Stack Developer — building intelligent, production-ready systems."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
@@ -75,19 +58,31 @@ export default function AboutMe() {
             className="space-y-6"
           >
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              I'm a <span className="font-bold text-blue-600 dark:text-blue-400">graduate Engineer</span> in <span className="font-semibold">Data Science, Big Data, and Artificial Intelligence</span> from ENSA Tétouan, Morocco — <span className="font-semibold">Class of 2025</span>.
+              {t.p1_prefix}
+              <span className="font-bold text-blue-600 dark:text-blue-400">{t.p1_role}</span>
+              {t.p1_middle}
+              <span className="font-semibold">{t.p1_field}</span>
+              {t.p1_suffix}
+              <span className="font-semibold">{t.p1_class}</span>
+              {t.p1_end}
             </p>
 
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              My expertise spans the <span className="font-semibold">entire AI/ML pipeline</span>: from data collection and preprocessing to model deployment and monitoring. I build production-grade systems for computer vision, natural language processing, and real-time data analytics.
+              {t.p2}
             </p>
 
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              As former <span className="font-bold text-purple-600 dark:text-purple-400">Vice President of AI Geeks Club</span>, I led technical workshops, organized hackathons, and mentored students in machine learning and software engineering.
+              {t.p3_prefix}
+              <span className="font-bold text-purple-600 dark:text-purple-400">{t.p3_role}</span>
+              {t.p3_suffix}
             </p>
 
             <p className="text-lg leading-relaxed text-gray-700 dark:text-gray-300">
-              I'm passionate about building <span className="font-semibold">scalable AI solutions</span> that solve real-world problems — whether it's optimizing data pipelines with Apache Spark, deploying ML models with Docker and Kubernetes, or shipping intelligent web applications. Now open to <span className="font-bold text-green-600 dark:text-green-400">engineering opportunities</span> in AI, ML, and Data Engineering.
+              {t.p4_prefix}
+              <span className="font-semibold">{t.p4_bold}</span>
+              {t.p4_middle}
+              <span className="font-bold text-green-600 dark:text-green-400">{t.p4_bold2}</span>
+              {t.p4_end}
             </p>
 
             <motion.div
@@ -97,7 +92,7 @@ export default function AboutMe() {
               className="pt-4"
             >
               <blockquote className="italic border-l-4 border-blue-500 dark:border-blue-400 pl-4 text-blue-600 dark:text-blue-400 font-medium">
-                "Turning data into intelligence, and intelligence into action."
+                "{t.quote}"
               </blockquote>
             </motion.div>
           </motion.div>
