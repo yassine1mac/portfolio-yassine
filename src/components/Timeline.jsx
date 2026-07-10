@@ -2,41 +2,12 @@
 import React from "react";
 import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
+import translations from "../translations";
 
-const timelineData = [
-  {
-    title: "Big Data & AI Engineer",
-    subtitle: "Open to opportunities · Freelance & Research",
-    date: "2025 – Present",
-    description: "Newly graduated engineer specialized in Big Data and Artificial Intelligence. Delivering end-to-end AI solutions: from data ingestion and distributed processing (Spark, Kafka) to model training, deployment, and MLOps. Available for full-time roles, freelance projects, and R&D collaborations."
-  },
-  {
-    title: "ENSA Tétouan — Engineer's Degree",
-    subtitle: "Data Science, Big Data & Artificial Intelligence · Graduated",
-    date: "2020 – 2025",
-    description: "5-year Engineering program (Diplôme d'Ingénieur d'État) in Data Science, Big Data, and AI. Coursework: machine learning, deep learning, distributed systems, cloud computing, data engineering, and MLOps. Graduated in 2025 with hands-on projects in NLP, computer vision, and real-time analytics."
-  },
-  {
-    title: "AI Geeks Club",
-    subtitle: "Vice President & Technical Lead",
-    date: "2024 – 2025",
-    description: "Led a team of 50+ members. Organized technical workshops on MLOps, hackathons, and mentored students in AI/ML. Spearheaded collaboration with industry partners for real-world AI projects."
-  },
-  {
-    title: "Transparence Informatique",
-    subtitle: "Data Analyst Intern",
-    date: "Aug – Sep 2024",
-    description: "Developed interactive dashboards in Power BI for business intelligence. Automated data processing workflows with Python, reducing manual effort by 70%. Worked with SQL databases and Excel automation."
-  },
-  {
-    title: "AI/ML Projects & Research",
-    subtitle: "Independent Developer & Researcher",
-    date: "2022 – Present",
-    description: "Built 15+ production-ready AI projects: food classification (ResNet), cheating detection (pose estimation), hotel review sentiment analysis (BERT), and real-time data pipelines (Apache Spark, Kafka). All projects deployed with Docker and CI/CD."
-  }
-];
+export default function Timeline({ language = "en" }) {
+  const t = translations[language].timeline;
+  const timelineData = t.items;
 
-export default function Timeline() {
   return (
     <section
       className="relative w-full bg-gradient-to-b from-[#0f172a] via-[#1e293b] to-[#0f172a] py-24 px-6 text-white overflow-hidden"
@@ -49,9 +20,9 @@ export default function Timeline() {
 
       <div className="relative z-10 max-w-4xl mx-auto">
         <SectionHeader
-          eyebrow="05 · Journey"
-          title="My path to becoming an engineer"
-          description="From first-year student to Big Data & AI engineer — the milestones that shaped my work."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
           darkBg
         />
 
@@ -95,7 +66,7 @@ export default function Timeline() {
           transition={{ duration: 1, delay: 0.4 }}
           className="text-center italic text-sm text-gray-400 mt-12"
         >
-          "The best way to predict the future is to engineer it."
+          "{t.quote}"
         </motion.p>
       </div>
     </section>
