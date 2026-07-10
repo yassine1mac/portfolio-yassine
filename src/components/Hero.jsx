@@ -1,6 +1,6 @@
 import React from "react";
 import { motion } from "framer-motion";
-import { FaWhatsapp, FaFilePdf, FaGraduationCap, FaChevronDown } from "react-icons/fa";
+import { FaFilePdf, FaGraduationCap, FaChevronDown, FaRocket } from "react-icons/fa";
 import translations from "../translations";
 
 export default function Hero({ language }) {
@@ -36,7 +36,7 @@ export default function Hero({ language }) {
             transition={{ duration: 0.5 }}
             className="inline-flex items-center gap-2 px-4 py-1.5 mb-4 rounded-full bg-gradient-to-r from-green-500/10 to-emerald-500/10 border border-green-500/30 text-green-600 dark:text-green-400 text-xs sm:text-sm font-semibold"
           >
-            <FaGraduationCap /> Graduate Engineer · Class of 2025
+            <FaGraduationCap /> {t.badge}
           </motion.div>
 
           <motion.div className="block mb-4">
@@ -77,11 +77,11 @@ export default function Hero({ language }) {
             <motion.a
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              href="#contact"
+              href="#projects"
               className="w-full sm:w-auto flex justify-center items-center gap-2 bg-gradient-to-r from-blue-600 to-purple-600 text-white px-8 py-4 rounded-full font-semibold hover:shadow-xl transition-all relative overflow-hidden group"
             >
               <span className="absolute inset-0 bg-gradient-to-r from-purple-600 to-pink-600 opacity-0 group-hover:opacity-100 transition-opacity"></span>
-              <FaWhatsapp className="relative z-10" /> <span className="relative z-10">{t.whatsapp}</span>
+              <FaRocket className="relative z-10" /> <span className="relative z-10">{t.projectsCta}</span>
             </motion.a>
             <motion.a
               whileHover={{ scale: 1.05 }}
@@ -104,16 +104,16 @@ export default function Hero({ language }) {
             className="mt-12 grid grid-cols-3 gap-6 max-w-md mx-auto md:mx-0"
           >
             <div className="text-center">
-              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">15+</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Projects</div>
+              <div className="text-3xl font-bold text-blue-600 dark:text-blue-400">6+</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">{t.stats.projects}</div>
             </div>
             <div className="text-center border-x border-gray-300 dark:border-gray-700">
-              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">2025</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Engineer Degree</div>
+              <div className="text-3xl font-bold text-purple-600 dark:text-purple-400">2026</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">{t.stats.degree}</div>
             </div>
             <div className="text-center">
               <div className="text-3xl font-bold text-pink-600 dark:text-pink-400">15+</div>
-              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">Tech Stack</div>
+              <div className="text-xs text-gray-600 dark:text-gray-400 mt-1">{t.stats.stack}</div>
             </div>
           </motion.div>
         </div>
