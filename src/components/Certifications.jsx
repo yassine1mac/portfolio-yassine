@@ -1,9 +1,10 @@
 // src/components/Certifications.jsx
 import React from "react";
 import { motion } from "framer-motion";
-import { FaExternalLinkAlt, FaAward, FaCertificate } from "react-icons/fa";
-import { SiCoursera, SiKaggle, SiDatacamp, SiUdemy, SiGoogle } from "react-icons/si";
+import { FaAward, FaCertificate } from "react-icons/fa";
+import { SiCoursera, SiKaggle, SiDatacamp, SiGoogle } from "react-icons/si";
 import SectionHeader from "./SectionHeader";
+import translations from "../translations";
 
 const certifications = [
   {
@@ -51,20 +52,22 @@ const certifications = [
     provider: "Amazon Web Services",
     icon: <FaCertificate className="text-3xl text-yellow-500" />,
     skills: ["SageMaker", "Lambda", "S3", "EC2"],
-    date: "2025",
+    date: "2026",
     status: "in-progress"
   },
   {
-    title: "Engineer's Degree — Big Data & AI",
-    provider: "ENSA Tétouan",
+    title: "State Engineer Degree — Big Data & AI",
+    provider: "ENSA Tétouan · Abdelmalek Essaâdi University",
     icon: <FaAward className="text-3xl text-blue-500" />,
     skills: ["Machine Learning", "Big Data", "Cloud", "MLOps"],
-    date: "2025",
+    date: "2026",
     status: "completed"
   }
 ];
 
-export default function Certifications() {
+export default function Certifications({ language = "en" }) {
+  const t = translations[language].certifications;
+
   return (
     <section
       id="certifications"
@@ -75,9 +78,9 @@ export default function Certifications() {
 
       <div className="max-w-6xl mx-auto relative z-10">
         <SectionHeader
-          eyebrow="06 · Credentials"
-          title="Certifications & degree"
-          description="Formal recognition of the skills I bring to production AI systems."
+          eyebrow={t.eyebrow}
+          title={t.title}
+          description={t.description}
         />
 
         <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
@@ -97,7 +100,7 @@ export default function Certifications() {
                 ? 'bg-green-100 dark:bg-green-900/30 text-green-700 dark:text-green-400'
                 : 'bg-yellow-100 dark:bg-yellow-900/30 text-yellow-700 dark:text-yellow-400'
             }`}>
-              {cert.status === 'completed' ? 'Completed' : 'In Progress'}
+              {cert.status === 'completed' ? t.statusCompleted : t.statusInProgress}
             </div>
 
             <div className="p-6">
