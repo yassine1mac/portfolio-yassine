@@ -1,7 +1,7 @@
 import React from "react";
-import { motion } from "framer-motion";
 import SectionHeader from "./SectionHeader";
 import translations from "../translations";
+import useReveal from "../hooks/useReveal";
 
 // Stack ordered by CV emphasis: LLMs/RAG/data first, then full-stack, then ops.
 const stack = [
@@ -27,46 +27,48 @@ const stack = [
 
 export default function TechStack({ language = "en" }) {
   const t = translations[language].techStack;
+  const ref = useReveal();
 
   return (
     <section
-      className="relative w-full py-24 bg-gradient-to-b from-[#1f2937] via-[#111827] to-black text-white overflow-hidden"
       id="tech"
+      className="relative w-full py-24 md:py-32 px-6"
+      style={{ backgroundColor: "var(--bg)" }}
     >
-      {/* Radial glow */}
-      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-gradient-radial from-blue-500/10 via-purple-500/5 to-transparent rounded-full blur-3xl pointer-events-none"></div>
-
-      <div className="max-w-6xl mx-auto px-6 relative z-10">
+      <div className="max-w-6xl mx-auto">
         <SectionHeader
           eyebrow={t.eyebrow}
           title={t.title}
           description={t.description}
-          darkBg
         />
 
-        <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4 sm:gap-6">
+        <div
+          ref={ref}
+          className="reveal grid grid-cols-3 sm:grid-cols-4 md:grid-cols-6 gap-3"
+        >
           {stack.map((tech, i) => (
-            <motion.div
+            <div
               key={i}
-              initial={{ opacity: 0, y: 20, scale: 0.9 }}
-              whileInView={{ opacity: 1, y: 0, scale: 1 }}
-              viewport={{ once: true, amount: 0.2 }}
-              transition={{ duration: 0.4, delay: (i % 6) * 0.05 }}
-              whileHover={{ scale: 1.08, y: -4 }}
-              className="group relative bg-white/[0.03] backdrop-blur-md border border-white/10 shadow-xl rounded-xl p-4 flex flex-col items-center justify-center transition-all hover:border-purple-500/50 hover:bg-white/[0.06]"
+              className="group flex flex-col items-center gap-2 rounded-card border p-4 transition-colors"
+              style={{
+                backgroundColor: "var(--surface)",
+                borderColor: "var(--hairline)"
+              }}
+              onMouseEnter={(e) => { e.currentTarget.style.borderColor = "var(--accent)"; }}
+              onMouseLeave={(e) => { e.currentTarget.style.borderColor = "var(--hairline)"; }}
+              title={tech.name}
             >
-              <div className="absolute inset-0 rounded-xl bg-gradient-to-br from-blue-500/0 via-purple-500/0 to-pink-500/0 group-hover:from-blue-500/10 group-hover:via-purple-500/10 group-hover:to-pink-500/10 transition-all"></div>
               <img
                 src={tech.logo}
-                alt={tech.name}
-                title={tech.name}
+                alt=""
+                aria-hidden
                 loading="lazy"
-                className="relative h-10 sm:h-12 object-contain mb-2 group-hover:scale-110 transition-transform"
+                className="h-8 sm:h-9 object-contain grayscale group-hover:grayscale-0 transition-all"
               />
-              <p className="relative text-xs sm:text-sm text-gray-300 group-hover:text-white transition-colors">
+              <p className="font-mono text-[10px] uppercase tracking-widest text-center" style={{ color: "var(--fg-muted)" }}>
                 {tech.name}
               </p>
-            </motion.div>
+            </div>
           ))}
         </div>
       </div>
